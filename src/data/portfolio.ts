@@ -15,7 +15,7 @@ export const photos: Photo[] = [
     {
         id: 's2',
         src: '/portfolio/sport-action-duo-nb.jpg',
-        alt: 'Action basketball intense en noir et blanc par Steven Dufour',
+        alt: 'Action basketball intense à Auch par le photographe Steven Dufour',
         title: 'Duel au Panier',
         category: 'sport',
         size: 'md',
@@ -24,7 +24,7 @@ export const photos: Photo[] = [
     {
         id: 'p1',
         src: '/portfolio/portrait-allonge-nb.jpg',
-        alt: 'Portrait artistique noir et blanc par Steven Dufour',
+        alt: 'Portrait artistique noir et blanc réalisé à Auch par Steven Dufour',
         title: 'Sérénité Monochrome',
         category: 'portraits',
         size: 'md',
@@ -33,7 +33,7 @@ export const photos: Photo[] = [
     {
         id: 'ev1',
         src: '/portfolio/evenement-bouteilles-parasol.jpg',
-        alt: 'Cocktail en extérieur par Steven Dufour',
+        alt: 'Reportage événementiel dans le Gers par Steven Dufour',
         title: 'Cocktail Sunset',
         category: 'evenementiel',
         size: 'md',
@@ -42,7 +42,7 @@ export const photos: Photo[] = [
     {
         id: 's4',
         src: '/portfolio/team-huddle.jpg',
-        alt: 'Esprit d\'équipe huddle par Steven Dufour',
+        alt: 'Photographie de sport collectif à Auch - Steven Dufour',
         category: 'sport',
         size: 'md',
         objectPosition: '50% 30%',
@@ -50,7 +50,7 @@ export const photos: Photo[] = [
     {
         id: 'p2',
         src: '/portfolio/portrait-wicker-chair.jpg',
-        alt: 'Portrait sur chaise en osier par Steven Dufour',
+        alt: 'Séance portrait professionnel à Auch par Steven Dufour',
         category: 'portraits',
         size: 'md',
         objectPosition: 'top',
@@ -58,7 +58,7 @@ export const photos: Photo[] = [
     {
         id: 's1',
         src: '/portfolio/basketball-back.jpg',
-        alt: 'Action basketball par Steven Dufour',
+        alt: 'Action basketball Auch - Photographe Steven Dufour',
         category: 'sport',
         size: 'md',
         objectPosition: 'center',
@@ -68,7 +68,7 @@ export const photos: Photo[] = [
     {
         id: 'p3',
         src: '/portfolio/portrait-rose-doree.jpeg',
-        alt: 'Portrait avec rose dorée par Steven Dufour',
+        alt: 'Portrait artistique avec rose dorée - Steven Dufour Photographe Auch',
         category: 'portraits',
         size: 'lg',
         objectPosition: 'center',
@@ -76,7 +76,7 @@ export const photos: Photo[] = [
     {
         id: 'p4',
         src: '/portfolio/portrait-coiffeur.jpeg',
-        alt: 'Portrait professionnel coiffeur par Steven Dufour',
+        alt: 'Portrait métier artisan coiffeur à Auch par Steven Dufour',
         category: 'portraits',
         size: 'sm',
         objectPosition: 'center',
@@ -84,7 +84,7 @@ export const photos: Photo[] = [
     {
         id: 'p5',
         src: '/portfolio/portrait-duo-amies.jpeg',
-        alt: 'Portrait complice noir et blanc par Steven Dufour',
+        alt: 'Portrait de duo réalisé en studio à Auch par Steven Dufour',
         category: 'portraits',
         size: 'md',
         objectPosition: 'center',
@@ -92,7 +92,7 @@ export const photos: Photo[] = [
     {
         id: 'p6',
         src: '/portfolio/portrait-fourrure.jpeg',
-        alt: 'Portrait élégance et mode par Steven Dufour',
+        alt: 'Portrait mode et élégance - Photographe Auch Steven Dufour',
         category: 'portraits',
         size: 'lg',
         objectPosition: 'center',
@@ -102,7 +102,7 @@ export const photos: Photo[] = [
     {
         id: 's3',
         src: '/portfolio/player-walk.jpg',
-        alt: 'Marche avant le match par Steven Dufour',
+        alt: 'Match de basketball à Auch capturé par Steven Dufour',
         category: 'sport',
         size: 'md',
         objectPosition: 'center',
@@ -110,7 +110,7 @@ export const photos: Photo[] = [
     {
         id: 's5',
         src: '/portfolio/sport-boxing.jpeg',
-        alt: 'Action boxe intense par Steven Dufour',
+        alt: 'Shooting boxe intense à Auch par Steven Dufour',
         category: 'sport',
         size: 'lg',
         objectPosition: 'center',
@@ -118,7 +118,7 @@ export const photos: Photo[] = [
     {
         id: 's6',
         src: '/portfolio/sport-goal-drinking.jpeg',
-        alt: 'Gardien de but s\'hydratant par Steven Dufour',
+        alt: 'Reportage sportif dans le Gers - Steven Dufour Photography',
         category: 'sport',
         size: 'lg',
         objectPosition: 'center',
@@ -128,7 +128,7 @@ export const photos: Photo[] = [
     {
         id: 'ent1',
         src: '/portfolio/entreprise-bureau.jpg',
-        alt: 'Atmosphère de travail par Steven Dufour',
+        alt: 'Photographe entreprise Auch : reportage en milieu professionnel',
         category: 'entreprises',
         size: 'lg',
         objectPosition: 'center',
@@ -136,7 +136,7 @@ export const photos: Photo[] = [
     {
         id: 'ent2',
         src: '/portfolio/entreprise-entree.jpg',
-        alt: 'Extérieur architecture entreprise par Steven Dufour',
+        alt: 'Photographie d\'architecture d\'entreprise à Auch - Steven Dufour',
         category: 'entreprises',
         size: 'lg',
         objectPosition: 'center',
@@ -144,7 +144,7 @@ export const photos: Photo[] = [
     {
         id: 'ent3',
         src: '/portfolio/entreprise-salon.jpg',
-        alt: 'Espace accueil professionnel par Steven Dufour',
+        alt: 'Aménagement intérieur entreprise Gers par Steven Dufour',
         category: 'entreprises',
         size: 'lg',
         objectPosition: 'center',
@@ -154,7 +154,7 @@ export const photos: Photo[] = [
     {
         id: 'ev2',
         src: '/portfolio/event-table.jpg',
-        alt: 'Décoration de table événementielle par Steven Dufour',
+        alt: 'Décoration événementielle Auch - Photographe Steven Dufour',
         category: 'evenementiel',
         size: 'md',
         objectPosition: 'center',
@@ -162,7 +162,7 @@ export const photos: Photo[] = [
     {
         id: 'ev3',
         src: '/portfolio/evenement-mains.jpg',
-        alt: 'Détail émotionnel mains par Steven Dufour',
+        alt: 'Détail émotionnel lors d\'un événement à Auch par Steven Dufour',
         category: 'evenementiel',
         size: 'lg',
         objectPosition: 'center',
@@ -170,7 +170,7 @@ export const photos: Photo[] = [
     {
         id: 'ev4',
         src: '/portfolio/evenement-conference-nb.jpg',
-        alt: 'Captation de conférence par Steven Dufour',
+        alt: 'Conférence et événementiel entreprise Auch - Steven Dufour',
         category: 'evenementiel',
         size: 'lg',
         objectPosition: 'center',
@@ -178,7 +178,7 @@ export const photos: Photo[] = [
     {
         id: 'ev5',
         src: '/portfolio/evenement-sourire.jpg',
-        alt: 'Émotion et partage événementiel par Steven Dufour',
+        alt: 'Reportage sourires et émotion Gers par Steven Dufour',
         category: 'evenementiel',
         size: 'lg',
         objectPosition: 'center',
@@ -186,7 +186,7 @@ export const photos: Photo[] = [
     {
         id: 'ev6',
         src: '/portfolio/wine-bottles.jpg',
-        alt: 'Détail art de vivre bouteilles par Steven Dufour',
+        alt: 'Photographie culinaire et art de vivre à Auch - Steven Dufour',
         category: 'evenementiel',
         size: 'lg',
         objectPosition: 'center',
