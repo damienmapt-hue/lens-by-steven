@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lensbysteven.fr/sitemap.xml
+Sitemap: https://www.lensbysteven.fr/sitemap.xml
