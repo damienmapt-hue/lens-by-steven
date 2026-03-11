@@ -82,7 +82,7 @@ export default function PortfolioGrid() {
             </AnimatePresence>
 
             {/* Carousel Mobile : Visible uniquement sur mobile */}
-            <div className="md:hidden relative group/carousel">
+            <div className="md:hidden relative group/carousel overflow-hidden">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={`mobile-${activeCategory}`}
