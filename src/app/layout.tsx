@@ -51,6 +51,15 @@ export const metadata: Metadata = {
     images: ["/portfolio/basketball-profile.jpg"],
   },
   metadataBase: new URL("https://lensbysteven.fr"),
+  icons: {
+    icon: [
+      { url: "/icon.png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+    ],
+  },
 };
 
 export default function RootLayout({

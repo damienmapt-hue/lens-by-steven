@@ -54,11 +54,11 @@ export default function Hero() {
                         Photographe Professionnel · Auch, Occitanie
                     </motion.div>
                     <motion.h1 variants={itemVariants} className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-medium leading-[1.1] md:leading-[1] tracking-tight mb-8 md:mb-12">
-                        <span className="text-white block">Votre Photographe à Auch.</span>
-                        <span className="text-gold block">Capturer l&apos;instant.</span>
+                        <span className="text-white block">Capturer l&apos;instant.</span>
+                        <span className="text-gold block">Révéler l&apos;émotion.</span>
                     </motion.h1>
                     <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-xl font-light mb-10 md:mb-16 max-w-2xl leading-relaxed">
-                        Steven Dufour, photographe professionnel dans le Gers,<br className="hidden md:block" /> immortalise vos moments — sport, portrait, entreprise, événementiel.
+                        Steven Dufour immortalise vos moments avec une sensibilité unique — sport, portrait, entreprise, événementiel.
                     </motion.p>
 
                     <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-8">
