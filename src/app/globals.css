@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html, body {
     @apply bg-dark text-white;
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
   }
 }
