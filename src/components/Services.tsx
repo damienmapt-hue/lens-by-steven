@@ -71,7 +71,7 @@ export default function Services() {
                     </motion.span>
                     <TextReveal delay={0.1}>
                         <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mt-2 mb-4">
-                            Services Photographie
+                            Mes Prestations
                         </h2>
                     </TextReveal>
                     <AnimatedGoldLine />

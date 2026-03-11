@@ -22,7 +22,7 @@ export default function Portfolio() {
 
                     <TextReveal delay={0.1}>
                         <h2 className="text-5xl md:text-6xl font-display text-white mt-3">
-                            Portfolio Photographe
+                            Mon Travail
                         </h2>
                     </TextReveal>
 
