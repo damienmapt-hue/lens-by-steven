@@ -183,12 +183,4 @@ export const photos: Photo[] = [
         size: 'lg',
         objectPosition: 'center',
     },
-    {
-        id: 'ev6',
-        src: '/portfolio/wine-bottles.jpg',
-        alt: 'Photographie culinaire et art de vivre à Auch - Steven Dufour',
-        category: 'evenementiel',
-        size: 'lg',
-        objectPosition: 'center',
-    },
 ]
