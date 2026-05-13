@@ -1,31 +1,36 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Camera, User, Briefcase, CalendarHeart } from "lucide-react";
+import { Camera, User, Briefcase, CalendarHeart, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import AnimatedGoldLine from "./AnimatedGoldLine";
 import TextReveal from "./TextReveal";
 
 const services = [
     {
         id: "sport",
+        href: "/photographie-sportive",
         title: "Photographie Sportive",
         description: "Capturer l'intensité du mouvement, la puissance du geste et l'émotion brute de la victoire. Spécialisé dans le sport collectif et individuel, j'immortalise chaque action avec précision et réactivité. De la compétition amateur aux clubs professionnels du Gers et d'Occitanie, mes photos racontent l'histoire de chaque rencontre.",
         icon: Camera,
     },
     {
         id: "portrait",
+        href: "/portrait",
         title: "Portraits Authentiques",
         description: "Révéler votre personnalité à travers des portraits naturels, élégants et intemporels. Que ce soit pour un portrait professionnel, une séance en famille ou un shooting artistique, je crée une atmosphère de confiance pour que vous soyez pleinement vous-même. Disponible à Auch et dans toute l'Occitanie.",
         icon: User,
     },
     {
         id: "business",
+        href: "/photographe-entreprise",
         title: "Entreprises & Commerces",
         description: "Valoriser votre image de marque avec des visuels professionnels et percutants. Reportage d'entreprise, portraits corporate, photos de locaux et de produits — chaque image est conçue pour renforcer votre identité visuelle. Une approche sur mesure pour les TPE, PME et commerces du Gers et d'Occitanie.",
         icon: Briefcase,
     },
     {
         id: "events",
+        href: "/photographe-evenementiel",
         title: "Événementiel",
         description: "Immortaliser vos moments précieux avec discrétion, sensibilité et un regard toujours en éveil. Galas, conférences, fêtes de fin d'année ou événements privés — je couvre chaque occasion avec professionnalisme. Chaque image livrée sera le souvenir vivant d'un instant unique et partagé.",
         icon: CalendarHeart,
@@ -113,9 +118,17 @@ export default function Services() {
                             <div className="w-8 h-px bg-gold/30 mb-4 group-hover:w-16 transition-all duration-500 ease-out" />
 
                             {/* Description */}
-                            <p className="text-cream/60 text-sm leading-relaxed font-light">
+                            <p className="text-cream/60 text-sm leading-relaxed font-light mb-6">
                                 {service.description}
                             </p>
+
+                            {/* Lien vers la page dédiée */}
+                            <Link
+                                href={service.href}
+                                className="inline-flex items-center gap-2 text-gold text-xs uppercase tracking-widest hover:gap-3 transition-all duration-300 font-medium"
+                            >
+                                En savoir plus <ArrowRight className="w-3 h-3" />
+                            </Link>
                         </motion.div>
                     ))}
                 </motion.div>
