@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { Camera, User, Briefcase, CalendarHeart, ArrowRight } from "lucide-react";
+import { Camera, User, Briefcase, CalendarHeart, Heart, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import AnimatedGoldLine from "./AnimatedGoldLine";
 import TextReveal from "./TextReveal";
@@ -34,6 +34,13 @@ const services = [
         title: "Événementiel",
         description: "Immortaliser vos moments précieux avec discrétion, sensibilité et un regard toujours en éveil. Galas, conférences, fêtes de fin d'année ou événements privés — je couvre chaque occasion avec professionnalisme. Chaque image livrée sera le souvenir vivant d'un instant unique et partagé.",
         icon: CalendarHeart,
+    },
+    {
+        id: "mariage",
+        href: "/photographe-mariage-auch",
+        title: "Mariage",
+        description: "Votre jour J mérite des photos qui racontent votre histoire. Reportage naturel et discret de votre mariage à Auch et dans le Gers — des préparatifs à la soirée, sans rien manquer des moments qui comptent.",
+        icon: Heart,
     },
 ];
 
