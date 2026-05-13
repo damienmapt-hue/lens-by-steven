@@ -33,7 +33,7 @@ export default function Hero() {
             >
                 <Image
                     src="/portfolio/hero-basketball-bw.jpg"
-                    alt="Steven Dufour Photography Hero"
+                    alt="Photographe sportif à Auch — action basketball par Steven Dufour"
                     fill
                     priority
                     className="object-cover"

@@ -70,10 +70,12 @@ export default function About() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.7, delay: 0.2 }}
                         >
-                            Photographe passionné basé à Auch, spécialisé dans la capture d&apos;instants authentiques.
-                            Mon parcours, débuté dans le sport, m&apos;a mené à l&apos;art du portrait, de l&apos;entreprise
-                            et de l&apos;événementiel. Mon approche est fondée sur l&apos;écoute, la confiance
-                            et une expérience humaine authentique.
+                            Photographe professionnel basé à Auch, dans le Gers, spécialisé dans la capture d&apos;instants authentiques.
+                            Mon parcours, débuté dans le sport, m&apos;a progressivement mené à l&apos;art du portrait,
+                            de la photographie d&apos;entreprise et de l&apos;événementiel. Avec plus de 100 projets réalisés
+                            en Occitanie, j&apos;ai développé une approche fondée sur l&apos;écoute, la confiance et une
+                            relation humaine sincère. Chaque séance est unique : je prends le temps de comprendre
+                            vos attentes pour livrer des images qui vous ressemblent vraiment.
                         </motion.p>
 
                         {/* Stats en ligne */}

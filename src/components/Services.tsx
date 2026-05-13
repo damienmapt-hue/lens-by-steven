@@ -9,25 +9,25 @@ const services = [
     {
         id: "sport",
         title: "Photographie Sportive",
-        description: "Capturer l'intensité du mouvement, la puissance du geste et l'émotion brute de la victoire.",
+        description: "Capturer l'intensité du mouvement, la puissance du geste et l'émotion brute de la victoire. Spécialisé dans le sport collectif et individuel, j'immortalise chaque action avec précision et réactivité. De la compétition amateur aux clubs professionnels du Gers et d'Occitanie, mes photos racontent l'histoire de chaque rencontre.",
         icon: Camera,
     },
     {
         id: "portrait",
         title: "Portraits Authentiques",
-        description: "Révéler votre personnalité à travers des portraits naturels, élégants et intemporels.",
+        description: "Révéler votre personnalité à travers des portraits naturels, élégants et intemporels. Que ce soit pour un portrait professionnel, une séance en famille ou un shooting artistique, je crée une atmosphère de confiance pour que vous soyez pleinement vous-même. Disponible à Auch et dans toute l'Occitanie.",
         icon: User,
     },
     {
         id: "business",
         title: "Entreprises & Commerces",
-        description: "Valoriser votre image de marque avec des visuels professionnels et percutants.",
+        description: "Valoriser votre image de marque avec des visuels professionnels et percutants. Reportage d'entreprise, portraits corporate, photos de locaux et de produits — chaque image est conçue pour renforcer votre identité visuelle. Une approche sur mesure pour les TPE, PME et commerces du Gers et d'Occitanie.",
         icon: Briefcase,
     },
     {
         id: "events",
         title: "Événementiel",
-        description: "Immortaliser vos moments précieux avec discrétion, sensibilité et un regard unique.",
+        description: "Immortaliser vos moments précieux avec discrétion, sensibilité et un regard toujours en éveil. Galas, conférences, fêtes de fin d'année ou événements privés — je couvre chaque occasion avec professionnalisme. Chaque image livrée sera le souvenir vivant d'un instant unique et partagé.",
         icon: CalendarHeart,
     },
 ];
