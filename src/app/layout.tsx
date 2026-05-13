@@ -74,6 +74,7 @@ export default function RootLayout({
     "image": "https://www.lensbysteven.fr/portfolio/basketball-profile.jpg",
     "@id": "https://www.lensbysteven.fr",
     "url": "https://www.lensbysteven.fr",
+    "telephone": "+33672213948",
     "email": "sd.photo32@gmail.com",
     "description": "Photographe professionnel à Auch, Gers (32). Spécialisé en photographie sportive, portraits, entreprises et événementiel en Occitanie.",
     "address": {
