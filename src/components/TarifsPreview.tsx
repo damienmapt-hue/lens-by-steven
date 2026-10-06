@@ -78,21 +78,28 @@ export default function TarifsPreview() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.05 * i }}
-                            className="relative bg-gradient-to-br from-white/[0.04] to-dark border border-white/[0.08] hover:border-gold/25 rounded-[2px] p-6 group transition-all duration-400 hover:-translate-y-0.5"
                         >
-                            <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold group-hover:h-full transition-all duration-700 ease-out" />
+                            <Link
+                                href="/tarifs"
+                                className="relative bg-gradient-to-br from-white/[0.04] to-dark border border-white/[0.08] hover:border-gold/25 rounded-[2px] p-6 group transition-all duration-400 hover:-translate-y-0.5 flex flex-col cursor-pointer"
+                            >
+                                <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold group-hover:h-full transition-all duration-700 ease-out" />
 
-                            <p className="font-display font-bold text-xs uppercase tracking-[0.2em] text-gold/70 mb-4">
-                                {cat.category}
-                            </p>
-                            <ul className="space-y-2">
-                                {cat.items.map((item) => (
-                                    <li key={item} className="flex items-center gap-2.5 text-cream/85 text-sm font-light">
-                                        <Check className="w-3 h-3 text-gold/50 shrink-0" strokeWidth={2.5} />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+                                <p className="font-display font-bold text-xs uppercase tracking-[0.2em] text-gold/70 mb-4">
+                                    {cat.category}
+                                </p>
+                                <ul className="space-y-2">
+                                    {cat.items.map((item) => (
+                                        <li key={item} className="flex items-center gap-2.5 text-cream/85 text-sm font-light">
+                                            <Check className="w-3 h-3 text-gold/50 shrink-0" strokeWidth={2.5} />
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <span className="mt-4 text-[10px] uppercase tracking-[0.2em] text-gold/50 group-hover:text-gold transition-colors duration-300 flex items-center gap-1.5">
+                                    Voir les détails <ArrowRight className="w-3 h-3" />
+                                </span>
+                            </Link>
                         </motion.div>
                     ))}
 

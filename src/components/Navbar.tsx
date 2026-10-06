@@ -71,7 +71,7 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
                 <MagneticButton>
-                    <Link href="#" className={`font-display text-2xl font-bold tracking-wide transition-colors ${getLogoColor()}`}>
+                    <Link href="/" className={`font-display text-2xl font-bold tracking-wide transition-colors ${getLogoColor()}`}>
                         Lens By Steven
                     </Link>
                 </MagneticButton>
