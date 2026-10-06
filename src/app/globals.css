@@ -11,3 +11,33 @@
     width: 100%;
   }
 }
+
+@layer utilities {
+  /* Texte en dégradé or */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #C9A84C 0%, #E8DCC8 50%, #C9A84C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Dégradé de fond navy → dark */
+  .bg-gradient-section {
+    background: linear-gradient(180deg, #0D1520 0%, #1B2A4A 50%, #0D1520 100%);
+  }
+
+  /* Dégradé diagonal dark/navy avec touche gold */
+  .bg-gradient-dark-navy {
+    background: linear-gradient(135deg, #0D1520 0%, #1B2A4A 60%, #0D1520 100%);
+  }
+
+  /* Lueur gold en fond */
+  .glow-gold {
+    box-shadow: 0 0 60px rgba(201, 168, 76, 0.08), 0 0 120px rgba(201, 168, 76, 0.04);
+  }
+
+  /* Barre de dégradé gold */
+  .gold-line {
+    background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+  }
+}

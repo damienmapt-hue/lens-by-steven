@@ -18,7 +18,7 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        display: ["var(--font-bodoni)", "serif"],
+        display: ["var(--font-syne)", "sans-serif"],
         serif: ["var(--font-cormorant)", "serif"],
         sans: ["var(--font-jost)", "sans-serif"],
       },

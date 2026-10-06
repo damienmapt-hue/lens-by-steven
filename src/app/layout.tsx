@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Cormorant_Garamond, Jost } from "next/font/google";
+import { Syne, Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const bodoni = Bodoni_Moda({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-bodoni",
+  weight: ["700", "800"],
+  variable: "--font-syne",
   display: 'swap',
 });
 const cormorant = Cormorant_Garamond({
@@ -165,7 +166,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${bodoni.variable} ${cormorant.variable} ${jost.variable} font-sans bg-dark text-white antialiased`}
+        className={`${syne.variable} ${cormorant.variable} ${jost.variable} font-sans bg-dark text-white antialiased`}
       >
         <PageLoader />
         <SmoothScrollProvider>
