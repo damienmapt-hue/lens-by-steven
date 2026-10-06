@@ -116,7 +116,7 @@ export default function TarifsPage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-dark via-navy/40 to-dark pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
-                <div className="container mx-auto max-w-5xl relative z-10">
+                <div className="container mx-auto max-w-3xl relative z-10 text-center">
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -131,14 +131,14 @@ export default function TarifsPage() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="font-display font-bold text-6xl md:text-8xl text-white leading-[0.95] mb-6"
                     >
-                        Tarifs &<br />
+                        Tarifs &{" "}
                         <span className="text-gradient-gold">Prestations</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-cream/82 font-light max-w-lg leading-relaxed"
+                        className="text-cream/82 font-light max-w-lg mx-auto leading-relaxed"
                     >
                         Tarifs transparents et accessibles. Chaque prestation peut être adaptée — devis personnalisé gratuit sur demande.
                     </motion.p>

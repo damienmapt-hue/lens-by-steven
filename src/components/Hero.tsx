@@ -43,25 +43,25 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-dark/60 mix-blend-multiply" />
             </motion.div>
 
-            <div className="container mx-auto px-6 max-w-5xl relative z-10">
+            <div className="container mx-auto px-6 max-w-5xl relative z-10 flex justify-center">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-4xl pt-24 md:pt-20"
+                    className="max-w-3xl pt-24 md:pt-20 text-center"
                 >
                     <motion.div variants={itemVariants} className="font-serif text-gold font-medium text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.4em] uppercase mb-6 md:mb-10">
                         Photographe Professionnel · Auch, Occitanie
                     </motion.div>
-                    <motion.h1 variants={itemVariants} className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-medium leading-[1.1] md:leading-[1] tracking-tight mb-8 md:mb-12">
+                    <motion.h1 variants={itemVariants} className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-bold leading-[1.05] md:leading-[1] tracking-tight mb-8 md:mb-12">
                         <span className="text-white block">Capturer l&apos;instant.</span>
                         <span className="text-gold block">Révéler l&apos;émotion.</span>
                     </motion.h1>
-                    <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-xl font-light mb-10 md:mb-16 max-w-2xl leading-relaxed">
+                    <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-xl font-light mb-10 md:mb-16 max-w-xl mx-auto leading-relaxed">
                         Steven Dufour immortalise vos moments avec une sensibilité unique — sport, portrait, entreprise, événementiel.
                     </motion.p>
 
-                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-8">
+                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-6">
                         <MagneticButton className="w-full sm:w-auto">
                             <Link
                                 href="#travail"
