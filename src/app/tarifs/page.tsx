@@ -151,7 +151,7 @@ export default function TarifsPage() {
             {/* Tabs */}
             <div className="sticky top-[72px] z-40 bg-dark/95 backdrop-blur-md border-b border-white/[0.05] px-6 py-4">
                 <div className="container mx-auto max-w-5xl">
-                    <div className="flex gap-2 overflow-x-auto scrollbar-none flex-wrap">
+                    <div className="flex gap-2 overflow-x-auto scrollbar-none flex-wrap justify-center">
                         {categories.map(({ id, label, icon: Icon }) => (
                             <button
                                 key={id}
