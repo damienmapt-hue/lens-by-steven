@@ -96,9 +96,9 @@ function PricingCard({
 
 function SectionTitle({ children, sub }: { children: React.ReactNode; sub?: string }) {
     return (
-        <div className="mb-14">
+        <div className="mb-14 text-center">
             <h2 className="font-display font-bold text-5xl md:text-6xl text-white leading-tight mb-3">{children}</h2>
-            {sub && <p className="text-cream/80 font-light text-sm max-w-xl leading-relaxed">{sub}</p>}
+            {sub && <p className="text-cream/80 font-light text-sm max-w-xl mx-auto leading-relaxed">{sub}</p>}
         </div>
     );
 }

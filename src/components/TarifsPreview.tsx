@@ -81,6 +81,7 @@ export default function TarifsPreview() {
                         >
                             <Link
                                 href="/tarifs"
+                                scroll={true}
                                 className="relative bg-gradient-to-br from-white/[0.04] to-dark border border-white/[0.08] hover:border-gold/25 rounded-[2px] p-6 group transition-all duration-400 hover:-translate-y-0.5 flex flex-col cursor-pointer"
                             >
                                 <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold group-hover:h-full transition-all duration-700 ease-out" />
@@ -134,6 +135,7 @@ export default function TarifsPreview() {
                 <div className="text-center">
                     <Link
                         href="/tarifs"
+                        scroll={true}
                         className="inline-flex items-center gap-3 border border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 px-10 py-4 uppercase tracking-[0.2em] text-xs font-bold"
                     >
                         Voir tous les tarifs
