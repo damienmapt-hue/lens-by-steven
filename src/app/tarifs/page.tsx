@@ -334,9 +334,9 @@ export default function TarifsPage() {
                                 { range: "30 – 50 km", price: "+ 10 €", highlight: false },
                                 { range: "> 50 km", price: "Sur devis", highlight: false },
                             ].map(({ range, price, highlight }) => (
-                                <div key={range} className={`text-center p-4 rounded-[2px] border ${highlight ? "border-gold/30 bg-gold/[0.06]" : "border-white/[0.06] bg-white/[0.02]"}`}>
-                                    <p className="text-cream/40 text-xs font-serif uppercase tracking-wider mb-2">{range}</p>
-                                    <p className={`font-display font-bold text-lg ${highlight ? "text-gold" : "text-white"}`}>{price}</p>
+                                <div key={range} className={`text-center p-5 rounded-[2px] border ${highlight ? "border-gold/30 bg-gold/[0.06]" : "border-white/[0.08] bg-white/[0.03]"}`}>
+                                    <p className={`font-display font-bold text-base md:text-lg mb-1 ${highlight ? "text-gold" : "text-white"}`}>{range}</p>
+                                    <p className={`text-sm font-medium ${highlight ? "text-gold/80" : "text-cream/75"}`}>{price}</p>
                                 </div>
                             ))}
                         </div>
