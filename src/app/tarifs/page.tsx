@@ -56,7 +56,7 @@ function PricingCard({
             <div className="p-7 md:p-8 flex flex-col flex-1">
                 {/* Badge */}
                 <span className={`inline-block mb-5 text-[10px] uppercase tracking-[0.25em] font-medium w-fit px-3 py-1 rounded-[2px] ${
-                    highlight ? "bg-gold/20 text-gold border border-gold/30" : "bg-white/[0.05] text-cream/50 border border-white/[0.08]"
+                    highlight ? "bg-gold/20 text-gold border border-gold/30" : "bg-white/[0.05] text-cream/82 border border-white/[0.08]"
                 }`}>
                     {badge}
                 </span>
@@ -74,7 +74,7 @@ function PricingCard({
                 )}
 
                 {/* Titre */}
-                <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-cream/50 mb-5">
+                <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-cream/82 mb-5">
                     {title}
                 </p>
 
@@ -83,7 +83,7 @@ function PricingCard({
                 {/* Items */}
                 <ul className="space-y-2.5 flex-1">
                     {items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-cream/65 text-sm font-light leading-relaxed">
+                        <li key={i} className="flex items-start gap-2.5 text-cream/85 text-sm font-light leading-relaxed">
                             <Check className="w-3.5 h-3.5 text-gold/60 mt-0.5 shrink-0" strokeWidth={2.5} />
                             {item}
                         </li>
@@ -98,7 +98,7 @@ function SectionTitle({ children, sub }: { children: React.ReactNode; sub?: stri
     return (
         <div className="mb-14">
             <h2 className="font-display font-bold text-5xl md:text-6xl text-white leading-tight mb-3">{children}</h2>
-            {sub && <p className="text-cream/45 font-light text-sm max-w-xl leading-relaxed">{sub}</p>}
+            {sub && <p className="text-cream/80 font-light text-sm max-w-xl leading-relaxed">{sub}</p>}
         </div>
     );
 }
@@ -138,7 +138,7 @@ export default function TarifsPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-cream/50 font-light max-w-lg leading-relaxed"
+                        className="text-cream/82 font-light max-w-lg leading-relaxed"
                     >
                         Tarifs transparents et accessibles. Chaque prestation peut être adaptée — devis personnalisé gratuit sur demande.
                     </motion.p>
@@ -198,7 +198,7 @@ export default function TarifsPage() {
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
                                 className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 flex items-center gap-4">
                                 <span className="text-gold text-xl">🤝</span>
-                                <p className="text-cream/55 text-sm font-light">
+                                <p className="text-cream/82 text-sm font-light">
                                     <strong className="text-cream/80 font-medium">Collaborations</strong> — tarif préférentiel pour clubs et sportifs en échange d&apos;utilisation des images. Chaque demande étudiée au cas par cas.
                                 </p>
                             </motion.div>
@@ -224,7 +224,7 @@ export default function TarifsPage() {
                             </div>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
                                 className="mt-6 border border-gold/20 bg-gold/[0.04] rounded-[2px] p-5 text-center">
-                                <p className="text-cream/65 text-sm font-light">
+                                <p className="text-cream/85 text-sm font-light">
                                     <span className="text-gold font-bold">Photo supplémentaire — 8 €</span>
                                     <span className="text-cream/40"> · Achat possible après la séance</span>
                                 </p>
@@ -251,7 +251,7 @@ export default function TarifsPage() {
                             </div>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
                                 className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 text-center">
-                                <p className="text-cream/55 text-sm font-light">
+                                <p className="text-cream/82 text-sm font-light">
                                     <strong className="text-cream/80 font-medium">Formule mensuelle disponible</strong> — contenu régulier pour votre communication. Tarif sur mesure.
                                 </p>
                             </motion.div>
@@ -277,7 +277,7 @@ export default function TarifsPage() {
                             </div>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
                                 className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 text-center">
-                                <p className="text-cream/55 text-sm font-light">
+                                <p className="text-cream/82 text-sm font-light">
                                     <strong className="text-cream/80 font-medium">Plus de 6 heures</strong> — tarif établi sur devis personnalisé.
                                 </p>
                             </motion.div>
@@ -303,7 +303,7 @@ export default function TarifsPage() {
                             </div>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
                                 className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5">
-                                <p className="text-cream/55 text-sm font-light text-center mb-3">
+                                <p className="text-cream/82 text-sm font-light text-center mb-3">
                                     <strong className="text-cream/80 font-medium">Options disponibles</strong>
                                 </p>
                                 <div className="flex flex-wrap justify-center gap-2">
@@ -356,7 +356,7 @@ export default function TarifsPage() {
                         <h3 className="font-display font-bold text-4xl md:text-5xl text-white mb-4 relative z-10 leading-tight">
                             Un projet en tête ?
                         </h3>
-                        <p className="text-cream/45 font-light mb-8 max-w-md mx-auto relative z-10">
+                        <p className="text-cream/80 font-light mb-8 max-w-md mx-auto relative z-10">
                             Chaque prestation peut être adaptée à vos besoins spécifiques.
                         </p>
                         <Link

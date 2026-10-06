@@ -74,7 +74,7 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="relative pt-24 pb-16 md:pt-32 md:pb-24 bg-dark border-t border-white/5 scroll-mt-20">
+        <section id="contact" className="relative pt-24 pb-16 md:pt-32 md:pb-24 border-t border-white/5 scroll-mt-20" style={{background: "linear-gradient(180deg, #0D1520 0%, #162035 50%, #0D1520 100%)"}}>
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <div className="text-center mb-16 md:mb-20">
                     <motion.span
@@ -104,7 +104,7 @@ export default function Contact() {
                         whileInView="whileInView"
                         viewport={{ once: true, margin: "-80px" }}
                         transition={{ duration: 0.7, delay: 0.3 }}
-                        className="text-cream/70 font-light"
+                        className="text-cream/90 font-light"
                     >
                         Un projet ? Une idée ? N&apos;hésitez pas à me contacter.
                     </motion.p>

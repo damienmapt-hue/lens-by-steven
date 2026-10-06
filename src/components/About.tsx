@@ -8,7 +8,7 @@ import MagneticButton from "./MagneticButton";
 
 export default function About() {
     return (
-        <section id="a-propos" className="bg-dark py-20 lg:py-32 scroll-mt-20">
+        <section id="a-propos" className="py-20 lg:py-32 scroll-mt-20" style={{background: "linear-gradient(180deg, #0D1520 0%, #1a2840 45%, #0D1520 100%)"}}>
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-0 lg:gap-12 items-start">
 
@@ -64,7 +64,7 @@ export default function About() {
 
                         {/* Paragraphe bio */}
                         <motion.p
-                            className="text-cream/70 leading-relaxed text-base lg:text-lg max-w-lg"
+                            className="text-cream/90 leading-relaxed text-base lg:text-lg max-w-lg"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -95,7 +95,7 @@ export default function About() {
                                     <p className="text-3xl lg:text-4xl font-display text-gold">
                                         <CountUp end={stat.value} suffix={stat.suffix} duration={1.8} />
                                     </p>
-                                    <p className="text-cream/60 text-xs tracking-widest uppercase mt-1">{stat.label}</p>
+                                    <p className="text-cream/80 text-xs tracking-widest uppercase mt-1">{stat.label}</p>
                                 </motion.div>
                             ))}
                         </div>

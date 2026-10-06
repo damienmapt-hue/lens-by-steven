@@ -5,7 +5,7 @@ import TextReveal from '@/components/TextReveal'
 
 export default function Portfolio() {
     return (
-        <section id="travail" className="py-24 bg-navy scroll-mt-20">
+        <section id="travail" className="py-24 scroll-mt-20" style={{background: "linear-gradient(180deg, #0D1520 0%, #1B2A4A 40%, #1B2A4A 60%, #0D1520 100%)"}}>
             <div className="max-w-7xl mx-auto px-6 md:px-12">
 
                 {/* Header section — pattern uniforme */}
@@ -36,7 +36,7 @@ export default function Portfolio() {
                     />
 
                     <motion.p
-                        className="text-cream/60 text-sm mt-5 max-w-md mx-auto font-light tracking-wide"
+                        className="text-cream/85 text-sm mt-5 max-w-md mx-auto font-light tracking-wide"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}

@@ -68,7 +68,7 @@ export default function Services() {
     };
 
     return (
-        <section id="prestations" className="relative pt-24 pb-32 md:pt-32 md:pb-52 bg-dark scroll-mt-20">
+        <section id="prestations" className="relative pt-24 pb-32 md:pt-32 md:pb-52 scroll-mt-20" style={{background: "linear-gradient(180deg, #0D1520 0%, #111e33 50%, #0D1520 100%)"}}>
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <div className="text-center mb-16 md:mb-20">
                     <motion.span
@@ -125,7 +125,7 @@ export default function Services() {
                             <div className="w-8 h-px bg-gold/30 mb-4 group-hover:w-16 transition-all duration-500 ease-out" />
 
                             {/* Description */}
-                            <p className="text-cream/60 text-sm leading-relaxed font-light mb-6">
+                            <p className="text-cream/85 text-sm leading-relaxed font-light mb-6">
                                 {service.description}
                             </p>
 

@@ -87,7 +87,7 @@ export default function TarifsPreview() {
                             </p>
                             <ul className="space-y-2">
                                 {cat.items.map((item) => (
-                                    <li key={item} className="flex items-center gap-2.5 text-cream/65 text-sm font-light">
+                                    <li key={item} className="flex items-center gap-2.5 text-cream/85 text-sm font-light">
                                         <Check className="w-3 h-3 text-gold/50 shrink-0" strokeWidth={2.5} />
                                         {item}
                                     </li>
@@ -110,7 +110,7 @@ export default function TarifsPreview() {
                             <p className="font-display font-bold text-2xl text-white leading-tight mb-3">
                                 Un projet particulier ?
                             </p>
-                            <p className="text-cream/45 text-sm font-light leading-relaxed">
+                            <p className="text-cream/80 text-sm font-light leading-relaxed">
                                 Chaque prestation peut être adaptée à vos besoins. Contactez Steven pour un devis personnalisé.
                             </p>
                         </div>

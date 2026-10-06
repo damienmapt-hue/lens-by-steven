@@ -9,6 +9,22 @@
     max-width: 100%;
     position: relative;
     width: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Textes corps — lisibilité garantie */
+  p, li, blockquote {
+    color: rgba(232, 220, 200, 0.82);
+    letter-spacing: 0.01em;
+  }
+
+  /* Labels uppercase petits — toujours lisibles */
+  .label-upper {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.85);
   }
 }
 
