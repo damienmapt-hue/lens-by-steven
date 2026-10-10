@@ -25,9 +25,13 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-navy flex flex-col items-center justify-center gap-2 text-xs text-cream/50 uppercase tracking-widest text-center">
-                    <p>© {new Date().getFullYear()} Steven Dufour Photography</p>
-                    <p>Auch, Occitanie</p>
+                <div className="mt-12 pt-8 border-t border-white/10 flex flex-col items-center justify-center gap-3 text-center">
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        <Link href="/mentions-legales" className="text-cream/40 hover:text-gold transition-colors text-xs uppercase tracking-widest">Mentions légales</Link>
+                        <span className="text-cream/20 text-xs">·</span>
+                        <Link href="/politique-confidentialite" className="text-cream/40 hover:text-gold transition-colors text-xs uppercase tracking-widest">Politique de confidentialité</Link>
+                    </div>
+                    <p className="text-xs text-cream/30 uppercase tracking-widest">© {new Date().getFullYear()} Steven Dufour — Auto-entrepreneur · Auch, Occitanie</p>
                 </div>
             </div>
         </footer>
