@@ -36,7 +36,7 @@ export default function PolitiqueConfidentialitePage() {
                             <div className="border-l-2 border-gold/30 pl-6 space-y-2">
                                 <p><span className="text-cream/50 text-sm">Nom :</span> Steven Dufour</p>
                                 <p><span className="text-cream/50 text-sm">Statut :</span> Auto-entrepreneur</p>
-                                <p><span className="text-cream/50 text-sm">Adresse :</span> <span className="text-gold font-medium">[À COMPLÉTER]</span>, 32000 Auch, France</p>
+                                <p><span className="text-cream/50 text-sm">Adresse :</span> 19 rue Montebello, 32000 Auch, France</p>
                                 <p><span className="text-cream/50 text-sm">Email :</span> sd.photo32@gmail.com</p>
                                 <p><span className="text-cream/50 text-sm">Téléphone :</span> 06 72 21 39 48</p>
                             </div>
