@@ -4,9 +4,10 @@ import { Category } from '@/data/portfolio'
 
 const categories: { value: Category; label: string }[] = [
     { value: 'tous', label: 'Tous' },
+    { value: 'mariage', label: 'Mariage' },
     { value: 'sport', label: 'Sport' },
-    { value: 'portraits', label: 'Portraits' },
     { value: 'evenementiel', label: 'Événementiel' },
+    { value: 'portraits', label: 'Portraits' },
     { value: 'entreprises', label: 'Entreprises' },
 ]
 
