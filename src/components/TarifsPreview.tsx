@@ -1,146 +1,220 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import TextReveal from "./TextReveal";
 
-const highlights = [
+interface Tier {
+    name: string;
+    tagline: string;
+    price: string;
+    from?: boolean;
+    items: string[];
+    featured?: boolean;
+}
+
+interface Category {
+    id: string;
+    label: string;
+    note: string;
+    tiers: Tier[];
+}
+
+const categories: Category[] = [
     {
-        category: "Sport",
-        items: ["Pack Découverte — 25 €", "Pack Joueur — 40 €", "Pack Performance — 55 €", "Formule Équipe — dès 100 €"],
+        id: "mariage",
+        label: "Mariage",
+        note: "Options : séance engagement, séance Day After, album photo, heures supplémentaires, deuxième photographe.",
+        tiers: [
+            { name: "Collection Essentielle", tagline: "L'essentiel du jour J", price: "600 €", from: true, items: ["Cérémonie", "Photos de couple et de groupe", "Moments importants", "Galerie numérique"] },
+            { name: "Collection Journée", tagline: "Du matin au cocktail", price: "950 €", from: true, featured: true, items: ["Préparatifs et cérémonie", "Photos de couple et de groupe", "Cocktail et début de réception", "Galerie numérique"] },
+            { name: "Collection Intégrale", tagline: "Journée complète", price: "1 300 €", from: true, items: ["Des préparatifs à la soirée", "Cérémonie complète", "Couple, cocktail, réception", "Galerie numérique complète"] },
+        ],
     },
     {
-        category: "Portrait",
-        items: ["Portrait Essentiel — 50 €", "Portrait Standard — 80 €", "Portrait Premium — 120 €"],
+        id: "evenementiel",
+        label: "Événementiel",
+        note: "Au-delà de 6 heures, le tarif est établi sur devis personnalisé.",
+        tiers: [
+            { name: "2 heures", tagline: "Événement court", price: "150 €", items: ["Jusqu'à 2 h de présence", "Reportage de l'événement", "Photos retouchées", "Galerie numérique"] },
+            { name: "4 heures", tagline: "Reportage complet", price: "250 €", featured: true, items: ["Jusqu'à 4 h de présence", "Moments forts et détails", "Photos retouchées", "Galerie numérique"] },
+            { name: "6 heures", tagline: "Grande journée", price: "350 €", items: ["Jusqu'à 6 h de présence", "Photos de groupe et spontanées", "Photos retouchées", "Galerie numérique"] },
+        ],
     },
     {
-        category: "Entreprise",
-        items: ["Pack Essentiel — dès 120 €", "Pack Communication — dès 200 €", "Pack Premium — dès 350 €"],
+        id: "sport",
+        label: "Sport",
+        note: "Tarif préférentiel pour les clubs et sportifs en échange d'une utilisation des images, étudié au cas par cas.",
+        tiers: [
+            { name: "Pack Découverte", tagline: "Idéal pour démarrer", price: "25 €", items: ["Présence sur la rencontre", "5 photos retouchées", "Livraison numérique HD"] },
+            { name: "Pack Joueur", tagline: "Plus de souvenirs", price: "40 €", items: ["Présence sur la rencontre", "10 à 15 photos retouchées", "Livraison numérique HD"] },
+            { name: "Pack Performance", tagline: "Galerie complète", price: "55 €", items: ["Présence sur la rencontre", "20 à 25 photos retouchées", "Galerie complète"] },
+            { name: "Formule Équipe", tagline: "Clubs et associations", price: "100 €", from: true, featured: true, items: ["Photos d'action et individuelles", "Photo d'équipe", "Avant et après-match", "Galerie complète"] },
+        ],
     },
     {
-        category: "Événementiel",
-        items: ["2 heures — 150 €", "4 heures — 250 €", "6 heures — 350 €"],
+        id: "portrait",
+        label: "Portrait",
+        note: "Photo supplémentaire : 8 €, achat possible après la séance.",
+        tiers: [
+            { name: "Portrait Essentiel", tagline: "Séance courte", price: "50 €", items: ["30 à 45 min de séance", "1 personne", "5 photos retouchées"] },
+            { name: "Portrait Standard", tagline: "Séance complète", price: "80 €", featured: true, items: ["Environ 1 h de séance", "Changement de tenue possible", "10 photos retouchées"] },
+            { name: "Portrait Premium", tagline: "Séance personnalisée", price: "120 €", items: ["Jusqu'à 1 h 30, seul ou en couple", "Plusieurs lieux et tenues", "Environ 20 photos retouchées"] },
+        ],
     },
     {
-        category: "Mariage",
-        items: ["Collection Essentielle — dès 600 €", "Collection Journée — dès 950 €", "Collection Intégrale — dès 1 300 €"],
+        id: "entreprise",
+        label: "Entreprise",
+        note: "Une formule mensuelle est possible pour un contenu régulier, sur mesure.",
+        tiers: [
+            { name: "Pack Essentiel", tagline: "Premier pas", price: "120 €", from: true, items: ["Jusqu'à 1 h de prise de vue", "Locaux, équipe, activité", "Environ 10 photos retouchées"] },
+            { name: "Pack Communication", tagline: "Site web et réseaux", price: "200 €", from: true, featured: true, items: ["Jusqu'à 2 h de prise de vue", "Portraits d'équipe, produits", "20 à 30 photos retouchées"] },
+            { name: "Pack Premium", tagline: "Banque d'images", price: "350 €", from: true, items: ["Jusqu'à 4 h de prise de vue", "Locaux, équipe, services", "40 à 60 photos retouchées"] },
+        ],
     },
 ];
 
 export default function TarifsPreview() {
+    const [activeId, setActiveId] = useState(categories[0].id);
+    const active = categories.find((c) => c.id === activeId) ?? categories[0];
+    const cols = active.tiers.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
+
     return (
-        <section className="relative bg-gradient-to-b from-navy via-dark to-dark pt-24 pb-32 md:pt-32 md:pb-44 overflow-hidden">
-            {/* Lueur gold centrée */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-gold/[0.05] rounded-full blur-[100px] pointer-events-none" />
+        <section id="tarifs" className="relative bg-gradient-to-b from-navy via-dark to-dark pt-24 pb-32 md:pt-32 md:pb-44 overflow-hidden scroll-mt-20">
+            <div className="absolute top-0 right-0 w-[520px] h-[360px] bg-gold/[0.05] rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="container mx-auto px-6 max-w-7xl relative z-10">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="block font-serif text-gold/80 text-xs uppercase tracking-[0.3em] mb-4"
-                    >
-                        Tarifs
-                    </motion.span>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 25 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-4"
-                    >
-                        Des tarifs <span className="text-gradient-gold">clairs</span><br />& accessibles
-                    </motion.h2>
-                    <motion.div
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="w-16 h-px gold-line mx-auto mt-4"
-                    />
-                </div>
-
-                {/* Cards résumé */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.7, delay: 0.15 }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10"
-                >
-                    {highlights.map((cat, i) => (
-                        <motion.div
-                            key={cat.category}
-                            initial={{ opacity: 0, y: 30 }}
+            <div className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10">
+                {/* En-tête */}
+                <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-end mb-12 md:mb-16">
+                    <div className="lg:col-span-7 min-w-0">
+                        <motion.span
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.05 * i }}
+                            transition={{ duration: 0.6 }}
+                            className="block text-gold/80 font-light tracking-[0.35em] text-xs uppercase mb-4"
                         >
-                            <Link
-                                href="/tarifs"
-                                scroll={true}
-                                className="relative bg-gradient-to-br from-white/[0.04] to-dark border border-white/[0.08] hover:border-gold/25 rounded-[2px] p-6 group transition-all duration-400 hover:-translate-y-0.5 flex flex-col cursor-pointer"
-                            >
-                                <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold group-hover:h-full transition-all duration-700 ease-out" />
-
-                                <p className="font-display font-bold text-xs uppercase tracking-[0.2em] text-gold/70 mb-4">
-                                    {cat.category}
-                                </p>
-                                <ul className="space-y-2">
-                                    {cat.items.map((item) => (
-                                        <li key={item} className="flex items-center gap-2.5 text-cream/85 text-sm font-light">
-                                            <Check className="w-3 h-3 text-gold/50 shrink-0" strokeWidth={2.5} />
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <span className="mt-4 text-[10px] uppercase tracking-[0.2em] text-gold/50 group-hover:text-gold transition-colors duration-300 flex items-center gap-1.5">
-                                    Voir les détails <ArrowRight className="w-3 h-3" />
-                                </span>
-                            </Link>
-                        </motion.div>
-                    ))}
-
-                    {/* Card CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                            Tarifs
+                        </motion.span>
+                        <TextReveal delay={0.1}>
+                            <h2 className="font-display text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[clamp(2.4rem,4.4vw,3.8rem)] text-white">
+                                <span className="block whitespace-nowrap">Des prix clairs,</span>
+                                <span className="block whitespace-nowrap">sans surprise.</span>
+                            </h2>
+                        </TextReveal>
+                    </div>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="relative bg-gradient-to-br from-navy to-dark border border-gold/30 rounded-[2px] p-6 flex flex-col justify-between group"
+                        transition={{ duration: 0.7, delay: 0.3 }}
+                        className="lg:col-span-5 min-w-0 text-cream/80 font-light leading-relaxed max-w-md"
                     >
-                        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />
-                        <div>
-                            <p className="font-serif text-xs uppercase tracking-[0.3em] text-gold/70 mb-3">Devis gratuit</p>
-                            <p className="font-display font-bold text-2xl text-white leading-tight mb-3">
-                                Un projet particulier ?
-                            </p>
-                            <p className="text-cream/80 text-sm font-light leading-relaxed">
-                                Chaque prestation peut être adaptée à vos besoins. Contactez Steven pour un devis personnalisé.
-                            </p>
-                        </div>
+                        Choisissez votre type de séance pour voir ce qui est inclus. Un projet particulier ? Chaque formule peut être adaptée, le devis est gratuit.
+                    </motion.p>
+                </div>
+
+                {/* Sélecteur de prestation */}
+                <div
+                    role="tablist"
+                    aria-label="Type de prestation"
+                    className="flex gap-2 overflow-x-auto pb-2 mb-8 md:mb-10 [&::-webkit-scrollbar]:hidden"
+                    style={{ scrollbarWidth: "none" }}
+                >
+                    {categories.map((c) => {
+                        const on = c.id === activeId;
+                        return (
+                            <button
+                                key={c.id}
+                                role="tab"
+                                aria-selected={on}
+                                onClick={() => setActiveId(c.id)}
+                                className={`relative shrink-0 px-5 md:px-7 py-3 text-xs uppercase tracking-[0.2em] transition-colors duration-300 min-h-[44px] ${on ? "text-dark" : "text-cream/70 hover:text-white"}`}
+                            >
+                                {on && (
+                                    <motion.span
+                                        layoutId="tarif-tab"
+                                        className="absolute inset-0 bg-gold"
+                                        transition={{ type: "spring", stiffness: 400, damping: 36 }}
+                                    />
+                                )}
+                                {!on && <span className="absolute inset-0 border border-white/15" />}
+                                <span className="relative font-medium">{c.label}</span>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                {/* Formules */}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={active.id}
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <ul
+                            role="tabpanel"
+                            className={`grid grid-cols-1 sm:grid-cols-2 ${cols} border-b border-white/10 lg:divide-x lg:divide-white/10`}
+                        >
+                            {active.tiers.map((t) => (
+                                <li
+                                    key={t.name}
+                                    className={`relative flex flex-col p-6 md:p-9 border-t sm:[&:nth-child(even)]:border-l sm:[&:nth-child(even)]:border-white/10 lg:[&:nth-child(even)]:border-l-0 ${
+                                        t.featured
+                                            ? "border-t-white/10 bg-gradient-to-b from-white/[0.06] to-transparent"
+                                            : "border-t-white/10"
+                                    }`}
+                                >
+                                    {t.featured && <span className="absolute -top-px inset-x-0 h-[2px] bg-gold" />}
+                                    <p className="text-[11px] uppercase tracking-[0.25em] text-gold/80 mb-1">{t.name}</p>
+                                    <p className="text-cream/60 text-sm font-light mb-5 md:mb-8">{t.tagline}</p>
+
+                                    <p className="mb-6 md:mb-8 flex items-baseline gap-2 text-white whitespace-nowrap">
+                                        {t.from && <span className="text-xs uppercase tracking-widest text-cream/60">dès</span>}
+                                        <span className={`font-display text-4xl md:text-6xl ${active.tiers.length === 4 ? "lg:text-5xl" : ""} leading-none tracking-tight tabular-nums`}>{t.price}</span>
+                                    </p>
+
+                                    <ul className="space-y-2.5 md:space-y-3">
+                                        {t.items.map((item) => (
+                                            <li key={item} className="flex gap-3 text-sm font-light text-cream/85 leading-snug">
+                                                <span className="mt-[0.6em] block h-px w-3 bg-gold shrink-0" />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="mt-5 text-sm text-cream/60 font-light max-w-3xl">{active.note}</p>
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Bas de section : déplacements + appels à l'action */}
+                <div className="mt-14 md:mt-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center border-t border-white/10 pt-8 md:pt-10">
+                    <p className="lg:col-span-5 text-cream/70 text-sm font-light leading-relaxed">
+                        <span className="text-white font-medium">Déplacement :</span> inclus jusqu&apos;à 15 km d&apos;Auch, puis +5 € (15 à 30 km), +10 € (30 à 50 km), au-delà sur devis.
+                    </p>
+                    <div className="lg:col-span-7 flex flex-col sm:flex-row sm:items-center lg:justify-end gap-5 sm:gap-8">
                         <Link
                             href="/#contact"
-                            className="mt-6 inline-flex items-center gap-2 text-gold text-xs uppercase tracking-widest font-bold hover:gap-3 transition-all duration-300 border-b border-gold/30 pb-1 w-fit"
+                            className="group inline-flex items-center justify-center gap-3 px-7 py-4 bg-gold text-dark hover:bg-white transition-colors duration-300 uppercase tracking-widest text-xs font-medium whitespace-nowrap"
                         >
-                            Demander un devis <ArrowRight className="w-3 h-3" />
+                            Demander un devis gratuit
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Link>
-                    </motion.div>
-                </motion.div>
-
-                {/* Bouton voir tous les tarifs */}
-                <div className="text-center">
-                    <Link
-                        href="/tarifs"
-                        scroll={true}
-                        className="inline-flex items-center gap-3 border border-gold text-gold hover:bg-gold hover:text-dark transition-all duration-300 px-10 py-4 uppercase tracking-[0.2em] text-xs font-bold"
-                    >
-                        Voir tous les tarifs
-                        <ArrowRight className="w-4 h-4" />
-                    </Link>
+                        <Link
+                            href="/tarifs"
+                            scroll={true}
+                            className="group inline-flex items-center justify-center gap-3 text-white hover:text-gold transition-colors uppercase tracking-widest text-xs font-medium whitespace-nowrap"
+                        >
+                            Tout le détail des tarifs
+                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                    </div>
                 </div>
             </div>
 
