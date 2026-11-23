@@ -118,18 +118,26 @@ export default function About() {
                             Photographe professionnel basé à Auch, dans le Gers, spécialisé dans la capture d&apos;instants authentiques.
                         </motion.p>
 
-                        <motion.p
-                            className="mt-5 text-cream/90 leading-relaxed text-base lg:text-[17px] max-w-xl"
+                        <motion.div
+                            className="mt-6 space-y-5 max-w-xl text-cream/90 leading-relaxed text-base lg:text-[17px]"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.7, delay: 0.25 }}
                         >
-                            Mon parcours, débuté dans le sport, m&apos;a progressivement mené à l&apos;art du portrait, de la photographie
-                            d&apos;entreprise et de l&apos;événementiel. Avec plus de 100 projets réalisés en Occitanie, j&apos;ai développé une
-                            approche fondée sur l&apos;écoute, la confiance et une relation humaine sincère. Chaque séance est unique : je
-                            prends le temps de comprendre vos attentes pour livrer des images qui vous ressemblent vraiment.
-                        </motion.p>
+                            <p>
+                                Mon parcours, débuté dans le sport, m&apos;a progressivement mené à l&apos;art du portrait, de la photographie
+                                d&apos;entreprise et de l&apos;événementiel.
+                            </p>
+                            <p>
+                                Avec plus de 100 projets réalisés en Occitanie, j&apos;ai développé une approche fondée sur l&apos;écoute,
+                                la confiance et une relation humaine sincère.
+                            </p>
+                            <p className="border-l-2 border-gold pl-5 text-white">
+                                Chaque séance est unique : je prends le temps de comprendre vos attentes pour livrer des images qui vous
+                                ressemblent vraiment.
+                            </p>
+                        </motion.div>
 
                         <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-6">
                             {values.map((v, i) => (

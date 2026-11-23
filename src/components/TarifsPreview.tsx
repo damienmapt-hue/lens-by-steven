@@ -82,8 +82,7 @@ export default function TarifsPreview() {
     const cols = active.tiers.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
 
     return (
-        <section id="tarifs" className="relative pt-24 pb-28 md:pt-32 md:pb-40 overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, #0D1520 0%, #14213a 40%, #0D1520 100%)" }}>
-            <div className="absolute top-0 right-0 w-[520px] h-[360px] bg-gold/[0.05] rounded-full blur-[120px] pointer-events-none" />
+        <section id="tarifs" className="relative pt-44 pb-44 md:pt-52 md:pb-52 overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, #0D1520 0px, #EFE6D5 150px, #EFE6D5 calc(100% - 150px), #0D1520 100%)" }}>
 
             <div className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10">
                 {/* En-tête */}
@@ -94,12 +93,12 @@ export default function TarifsPreview() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="block text-gold/80 font-normal tracking-[0.35em] text-xs uppercase mb-4"
+                            className="block text-[#8a6a1c] font-medium tracking-[0.35em] text-xs uppercase mb-4"
                         >
                             Tarifs
                         </motion.span>
                         <TextReveal delay={0.1}>
-                            <h2 className="font-display text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[clamp(2.4rem,4.4vw,3.8rem)] text-white">
+                            <h2 className="font-display text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[clamp(2.4rem,4.4vw,3.8rem)] text-navy">
                                 <span className="block whitespace-nowrap">Des prix clairs,</span>
                                 <span className="block whitespace-nowrap">sans surprise.</span>
                             </h2>
@@ -110,7 +109,7 @@ export default function TarifsPreview() {
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.3 }}
-                        className="lg:col-span-5 min-w-0 text-cream/80 font-normal leading-relaxed max-w-md"
+                        className="lg:col-span-5 min-w-0 text-navy/75 font-normal leading-relaxed max-w-md"
                     >
                         Choisissez votre type de séance pour voir ce qui est inclus. Un projet particulier ? Chaque formule peut être adaptée, le devis est gratuit.
                     </motion.p>
@@ -131,7 +130,7 @@ export default function TarifsPreview() {
                                 role="tab"
                                 aria-selected={on}
                                 onClick={() => setActiveId(c.id)}
-                                className={`relative shrink-0 px-5 md:px-7 py-3 text-xs uppercase tracking-[0.2em] transition-colors duration-300 min-h-[44px] ${on ? "text-dark" : "text-cream/70 hover:text-white"}`}
+                                className={`relative shrink-0 px-5 md:px-7 py-3 text-xs uppercase tracking-[0.2em] transition-colors duration-300 min-h-[44px] ${on ? "text-dark" : "text-navy/70 hover:text-navy"}`}
                             >
                                 {on && (
                                     <motion.span
@@ -140,7 +139,7 @@ export default function TarifsPreview() {
                                         transition={{ type: "spring", stiffness: 400, damping: 36 }}
                                     />
                                 )}
-                                {!on && <span className="absolute inset-0 border border-white/15" />}
+                                {!on && <span className="absolute inset-0 border border-navy/25" />}
                                 <span className="relative font-medium">{c.label}</span>
                             </button>
                         );
@@ -158,30 +157,30 @@ export default function TarifsPreview() {
                     >
                         <ul
                             role="tabpanel"
-                            className={`grid grid-cols-1 sm:grid-cols-2 ${cols} border-b border-white/10 lg:divide-x lg:divide-white/10`}
+                            className={`grid grid-cols-1 sm:grid-cols-2 ${cols} border-b border-navy/15 lg:divide-x lg:divide-navy/15`}
                         >
                             {active.tiers.map((t) => (
                                 <li
                                     key={t.name}
-                                    className={`relative flex flex-col p-6 md:p-9 border-t sm:[&:nth-child(even)]:border-l sm:[&:nth-child(even)]:border-white/10 lg:[&:nth-child(even)]:border-l-0 ${
+                                    className={`relative flex flex-col p-6 md:p-9 border-t sm:[&:nth-child(even)]:border-l sm:[&:nth-child(even)]:border-navy/15 lg:[&:nth-child(even)]:border-l-0 ${
                                         t.featured
-                                            ? "border-t-white/10 bg-gradient-to-b from-white/[0.06] to-transparent"
-                                            : "border-t-white/10"
+                                            ? "border-t-navy/15 bg-gradient-to-b from-white/70 to-transparent"
+                                            : "border-t-navy/15"
                                     }`}
                                 >
                                     {t.featured && <span className="absolute -top-px inset-x-0 h-[2px] bg-gold" />}
-                                    <p className="text-[11px] uppercase tracking-[0.25em] text-gold/80 mb-1">{t.name}</p>
-                                    <p className="text-cream/60 text-sm font-normal mb-5 md:mb-8">{t.tagline}</p>
+                                    <p className="text-[11px] uppercase tracking-[0.25em] text-[#8a6a1c] font-medium mb-1">{t.name}</p>
+                                    <p className="text-navy/60 text-sm font-normal mb-5 md:mb-8">{t.tagline}</p>
 
-                                    <p className="mb-6 md:mb-8 flex items-baseline gap-2 text-white whitespace-nowrap">
-                                        {t.from && <span className="text-xs uppercase tracking-widest text-cream/60">dès</span>}
+                                    <p className="mb-6 md:mb-8 flex items-baseline gap-2 text-navy whitespace-nowrap">
+                                        {t.from && <span className="text-xs uppercase tracking-widest text-navy/60">dès</span>}
                                         <span className={`font-display text-4xl md:text-6xl ${active.tiers.length === 4 ? "lg:text-5xl" : ""} leading-none tracking-tight tabular-nums`}>{t.price}</span>
                                     </p>
 
                                     <ul className="space-y-2.5 md:space-y-3">
                                         {t.items.map((item) => (
-                                            <li key={item} className="flex gap-3 text-sm font-normal text-cream/85 leading-snug">
-                                                <span className="mt-[0.6em] block h-px w-3 bg-gold shrink-0" />
+                                            <li key={item} className="flex gap-3 text-sm font-normal text-navy/85 leading-snug">
+                                                <span className="mt-[0.6em] block h-px w-3 bg-[#8a6a1c] shrink-0" />
                                                 {item}
                                             </li>
                                         ))}
@@ -189,19 +188,19 @@ export default function TarifsPreview() {
                                 </li>
                             ))}
                         </ul>
-                        <p className="mt-5 text-sm text-cream/60 font-normal max-w-3xl">{active.note}</p>
+                        <p className="mt-5 text-sm text-navy/65 font-normal max-w-3xl">{active.note}</p>
                     </motion.div>
                 </AnimatePresence>
 
                 {/* Bas de section : déplacements + appels à l'action */}
-                <div className="mt-14 md:mt-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center border-t border-white/10 pt-8 md:pt-10">
-                    <p className="lg:col-span-5 text-cream/70 text-sm font-normal leading-relaxed">
-                        <span className="text-white font-medium">Déplacement :</span> inclus jusqu&apos;à 15 km d&apos;Auch, puis +5 € (15 à 30 km), +10 € (30 à 50 km), au-delà sur devis.
+                <div className="mt-14 md:mt-20 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center border-t border-navy/15 pt-8 md:pt-10">
+                    <p className="lg:col-span-5 text-navy/75 text-sm font-normal leading-relaxed">
+                        <span className="text-navy font-semibold">Déplacement :</span> inclus jusqu&apos;à 15 km d&apos;Auch, puis +5 € (15 à 30 km), +10 € (30 à 50 km), au-delà sur devis.
                     </p>
                     <div className="lg:col-span-7 flex flex-col sm:flex-row sm:items-center lg:justify-end gap-5 sm:gap-8">
                         <Link
                             href="/#contact"
-                            className="group inline-flex items-center justify-center gap-3 px-7 py-4 bg-gold text-dark hover:bg-white transition-colors duration-300 uppercase tracking-widest text-xs font-medium whitespace-nowrap"
+                            className="group inline-flex items-center justify-center gap-3 px-7 py-4 bg-navy text-cream hover:bg-gold hover:text-dark transition-colors duration-300 uppercase tracking-widest text-xs font-medium whitespace-nowrap"
                         >
                             Demander un devis gratuit
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -209,7 +208,7 @@ export default function TarifsPreview() {
                         <Link
                             href="/tarifs"
                             scroll={true}
-                            className="group inline-flex items-center justify-center gap-3 text-white hover:text-gold transition-colors uppercase tracking-widest text-xs font-medium whitespace-nowrap"
+                            className="group inline-flex items-center justify-center gap-3 text-navy hover:text-[#8a6a1c] transition-colors uppercase tracking-widest text-xs font-medium whitespace-nowrap"
                         >
                             Tout le détail des tarifs
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

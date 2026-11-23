@@ -50,10 +50,9 @@ export default function Testimonials() {
     return (
         <section
             id="temoignages"
-            className="relative pt-24 pb-28 md:pt-36 md:pb-40 scroll-mt-20 overflow-hidden"
-            style={{ background: "linear-gradient(180deg, #0D1520 0%, #16233b 50%, #0D1520 100%)" }}
+            className="relative pt-44 pb-44 md:pt-52 md:pb-52 scroll-mt-20 overflow-hidden"
+            style={{ background: "linear-gradient(180deg, #0D1520 0px, #E8DCC8 150px, #E8DCC8 calc(100% - 150px), #0D1520 100%)" }}
         >
-            <div className="absolute -top-20 right-[-6rem] w-[520px] h-[520px] rounded-full bg-gold/[0.05] blur-[120px] pointer-events-none" />
 
             <div
                 className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10"
@@ -68,17 +67,17 @@ export default function Testimonials() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="block text-gold/80 tracking-[0.35em] text-xs uppercase mb-5"
+                            className="block text-[#8a6a1c] font-medium tracking-[0.35em] text-xs uppercase mb-5"
                         >
                             Témoignages
                         </motion.span>
                         <TextReveal delay={0.1}>
-                            <h2 className="font-display text-[2.2rem] sm:text-5xl lg:text-6xl leading-[1.05] text-white">
+                            <h2 className="font-display text-[2.2rem] sm:text-5xl lg:text-6xl leading-[1.05] text-navy">
                                 <span className="block">Ce qu&apos;ils</span>
-                                <span className="block text-gold">disent.</span>
+                                <span className="block text-[#8a6a1c]">disent.</span>
                             </h2>
                         </TextReveal>
-                        <p className="mt-6 text-cream/80 max-w-xs leading-relaxed">
+                        <p className="mt-6 text-navy/75 max-w-xs leading-relaxed">
                             Des clients qui racontent leur séance, avec leurs mots.
                         </p>
 
@@ -87,7 +86,7 @@ export default function Testimonials() {
                                 type="button"
                                 onClick={() => go(index - 1)}
                                 aria-label="Avis précédent"
-                                className="w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:border-gold hover:text-gold transition-colors"
+                                className="w-12 h-12 flex items-center justify-center border border-navy/30 text-navy hover:border-navy hover:bg-navy hover:text-cream transition-colors"
                             >
                                 <ArrowLeft className="w-5 h-5" />
                             </button>
@@ -95,11 +94,11 @@ export default function Testimonials() {
                                 type="button"
                                 onClick={() => go(index + 1)}
                                 aria-label="Avis suivant"
-                                className="w-12 h-12 flex items-center justify-center border border-white/20 text-white hover:border-gold hover:text-gold transition-colors"
+                                className="w-12 h-12 flex items-center justify-center border border-navy/30 text-navy hover:border-navy hover:bg-navy hover:text-cream transition-colors"
                             >
                                 <ArrowRight className="w-5 h-5" />
                             </button>
-                            <span className="ml-2 text-xs tracking-[0.25em] text-cream/70 tabular-nums">
+                            <span className="ml-2 text-xs tracking-[0.25em] text-navy/70 tabular-nums">
                                 0{index + 1} / 0{count}
                             </span>
                         </div>
@@ -109,7 +108,7 @@ export default function Testimonials() {
                     <div className="lg:col-span-8 relative">
                         <span
                             aria-hidden
-                            className="pointer-events-none absolute -top-16 -left-2 lg:-top-20 lg:-left-10 font-display text-[9rem] lg:text-[14rem] leading-none text-gold/20 select-none"
+                            className="pointer-events-none absolute -top-16 -left-2 lg:-top-20 lg:-left-10 font-display text-[9rem] lg:text-[14rem] leading-none text-gold/50 select-none"
                         >
                             &ldquo;
                         </span>
@@ -124,7 +123,7 @@ export default function Testimonials() {
                                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                                 >
                                     <Stars className="mb-6" />
-                                    <blockquote className="font-display text-[1.45rem] sm:text-3xl lg:text-4xl leading-[1.25] text-white font-medium">
+                                    <blockquote className="font-display text-[1.45rem] sm:text-3xl lg:text-4xl leading-[1.25] text-navy font-medium">
                                         {current.text}
                                     </blockquote>
                                     <figcaption className="mt-8 flex items-center gap-4">
@@ -132,8 +131,8 @@ export default function Testimonials() {
                                             {current.name[0].toUpperCase()}
                                         </span>
                                         <span>
-                                            <span className="block text-white font-medium">@{current.name}</span>
-                                            <span className="block text-cream/70 text-sm">Client de Steven</span>
+                                            <span className="block text-navy font-semibold">@{current.name}</span>
+                                            <span className="block text-navy/65 text-sm">Client de Steven</span>
                                         </span>
                                     </figcaption>
                                 </motion.figure>
@@ -153,7 +152,7 @@ export default function Testimonials() {
                                         aria-current={on}
                                         className="group text-left"
                                     >
-                                        <span className="relative block h-[2px] bg-white/15 overflow-hidden">
+                                        <span className="relative block h-[2px] bg-navy/15 overflow-hidden">
                                             {on && (
                                                 <motion.span
                                                     key={`${index}-${paused}`}
@@ -165,7 +164,7 @@ export default function Testimonials() {
                                             )}
                                         </span>
                                         <span
-                                            className={`mt-3 block text-xs md:text-sm truncate transition-colors duration-300 ${on ? "text-white" : "text-cream/50 group-hover:text-cream"}`}
+                                            className={`mt-3 block text-xs md:text-sm truncate transition-colors duration-300 ${on ? "text-navy font-medium" : "text-navy/50 group-hover:text-navy"}`}
                                         >
                                             @{t.name}
                                         </span>
