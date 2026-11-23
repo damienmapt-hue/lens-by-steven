@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Lightbox from "./portfolio/Lightbox";
@@ -34,10 +34,47 @@ export default function About() {
     const yA = useTransform(scrollYProgress, [0, 1], [70, -50]);
     const yB = useTransform(scrollYProgress, [0, 1], [-20, 70]);
 
-    // Bandeau de photos : on le fait glisser (doigt ou souris), on clique pour agrandir
+    // Bandeau de photos : défilement automatique, on peut le saisir (doigt ou souris) pour aller plus vite
     const rail = useRef<HTMLDivElement>(null);
-    const drag = useRef({ down: false, x: 0, left: 0, moved: false });
+    const drag = useRef({ down: false, x: 0, left: 0, moved: false, last: 0, vel: 0 });
+    const pause = useRef({ hover: false, touch: false, until: 0, visible: true, lightbox: false });
+    const inertia = useRef(0);
+    const reduce = useReducedMotion();
     const [open, setOpen] = useState<number | null>(null);
+    pause.current.lightbox = open !== null;
+
+    useEffect(() => {
+        const el = rail.current;
+        if (!el) return;
+        const io = new IntersectionObserver(([e]) => { pause.current.visible = e.isIntersecting; });
+        io.observe(el);
+        let raf = 0;
+        let prev = performance.now();
+        let pos = el.scrollLeft;
+        const tick = (now: number) => {
+            const dt = Math.min(120, now - prev);
+            prev = now;
+            const half = el.scrollWidth / 2;
+            const p = pause.current;
+            if (drag.current.down || p.touch) {
+                pos = el.scrollLeft;
+            } else if (Math.abs(inertia.current) > 0.2) {
+                pos = el.scrollLeft + inertia.current;
+                inertia.current *= 0.95;
+                el.scrollLeft = pos;
+            } else if (!reduce && p.visible && !p.hover && !p.lightbox && now > p.until) {
+                pos = (pos < el.scrollLeft - 2 || pos > el.scrollLeft + 2 ? el.scrollLeft : pos) + dt * 0.05;
+                if (pos >= half) pos -= half;
+                el.scrollLeft = pos;
+            } else {
+                pos = el.scrollLeft;
+            }
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => { cancelAnimationFrame(raf); io.disconnect(); };
+    }, [reduce]);
+
     const scrollRail = (dir: number) => rail.current?.scrollBy({ left: dir * 520, behavior: "smooth" });
 
     return (
@@ -203,30 +240,46 @@ export default function About() {
                 </div>
                 <div
                     ref={rail}
-                    className="flex gap-3 overflow-x-auto px-5 md:px-8 pb-2 cursor-grab active:cursor-grabbing select-none snap-x snap-proximity [&::-webkit-scrollbar]:hidden"
+                    className="flex gap-3 overflow-x-auto px-5 md:px-8 pb-2 cursor-grab active:cursor-grabbing select-none [&::-webkit-scrollbar]:hidden"
                     style={{ scrollbarWidth: "none" }}
                     aria-label="Aperçu des réalisations de Steven"
+                    onPointerEnter={(e) => { if (e.pointerType === "mouse") pause.current.hover = true; }}
                     onPointerDown={(e) => {
                         if (e.pointerType !== "mouse") return;
-                        drag.current = { down: true, x: e.clientX, left: rail.current?.scrollLeft ?? 0, moved: false };
+                        inertia.current = 0;
+                        drag.current = { down: true, x: e.clientX, left: rail.current?.scrollLeft ?? 0, moved: false, last: e.clientX, vel: 0 };
                     }}
                     onPointerMove={(e) => {
                         const d = drag.current;
                         if (!d.down || !rail.current) return;
                         const dx = e.clientX - d.x;
                         if (Math.abs(dx) > 5) d.moved = true;
+                        d.vel = d.last - e.clientX;
+                        d.last = e.clientX;
                         rail.current.scrollLeft = d.left - dx;
                     }}
-                    onPointerUp={() => { drag.current.down = false; }}
-                    onPointerLeave={() => { drag.current.down = false; }}
+                    onPointerUp={() => {
+                        if (drag.current.down) inertia.current = drag.current.vel * 1.6;
+                        drag.current.down = false;
+                    }}
+                    onPointerLeave={() => {
+                        if (drag.current.down) inertia.current = drag.current.vel * 1.6;
+                        drag.current.down = false;
+                        pause.current.hover = false;
+                    }}
+                    onTouchStart={() => { pause.current.touch = true; inertia.current = 0; }}
+                    onTouchEnd={() => { pause.current.touch = false; pause.current.until = performance.now() + 2500; }}
+                    onWheel={() => { pause.current.until = performance.now() + 2500; }}
                 >
-                    {strip.map((photo, i) => (
+                    {[...strip, ...strip].map((photo, n) => { const i = n % strip.length; return (
                         <button
-                            key={photo.id}
+                            key={`${photo.id}-${n}`}
                             type="button"
                             onClick={() => { if (!drag.current.moved) setOpen(i); }}
                             aria-label={`Agrandir la photo : ${photo.alt}`}
-                            className="group relative shrink-0 snap-start h-[200px] md:h-[280px] overflow-hidden"
+                            aria-hidden={n >= strip.length}
+                            tabIndex={n >= strip.length ? -1 : 0}
+                            className="group relative shrink-0 h-[200px] md:h-[280px] overflow-hidden"
                             style={{ aspectRatio: photo.w / photo.h }}
                         >
                             <Image
@@ -239,7 +292,7 @@ export default function About() {
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </button>
-                    ))}
+                    ); })}
                 </div>
             </div>
 

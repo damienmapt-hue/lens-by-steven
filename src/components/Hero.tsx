@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { getImageProps } from "next/image";
@@ -11,6 +12,11 @@ const { props: { srcSet: desktopSrcSet } } = getImageProps({ ...imageBase, src: 
 const { props: { srcSet: mobileSrcSet, ...mobileImg } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-24.jpg" });
 
 export default function Hero() {
+    const section = useRef<HTMLElement>(null);
+    // Au défilement, seul le texte glisse et s'efface (transform + opacité : rien ne recalcule la photo)
+    const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end start"] });
+    const textY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+    const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
@@ -25,13 +31,13 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative min-h-[100dvh] w-full overflow-hidden bg-dark flex flex-col justify-end">
+        <section ref={section} className="relative min-h-[100dvh] w-full overflow-hidden bg-dark flex flex-col justify-end">
             {/* Photo : groupe en paysage sur ordinateur, couple en vertical sur mobile (une seule image téléchargée) */}
             <motion.div
-                initial={{ scale: 1.06, filter: "brightness(0.5)" }}
-                animate={{ scale: 1, filter: "brightness(1)" }}
+                initial={{ scale: 1.06 }}
+                animate={{ scale: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute inset-0 origin-center"
+                className="absolute inset-0 origin-center transform-gpu"
             >
                 <picture>
                     <source media="(min-width: 768px)" srcSet={desktopSrcSet} sizes="100vw" />
@@ -43,14 +49,22 @@ export default function Hero() {
                         className="absolute inset-0 h-full w-full object-cover object-[50%_25%] md:object-[50%_12%]"
                     />
                 </picture>
-                <div className="absolute inset-0 bg-navy/20 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-navy/15" />
             </motion.div>
+            {/* Fondu d'arrivée : un voile qui disparaît (plus léger qu'un filtre sur la photo) */}
+            <motion.div
+                aria-hidden
+                initial={{ opacity: 0.5 }}
+                animate={{ opacity: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="absolute inset-0 bg-dark pointer-events-none"
+            />
 
             {/* Voiles : haut (menu) et bas (texte) */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-dark/80 via-dark/5 via-30% to-transparent md:to-transparent" />
             <div className="absolute inset-x-0 bottom-0 h-[62%] md:h-[56%] pointer-events-none bg-gradient-to-t from-dark from-15% via-dark/75 via-50% to-transparent" />
 
-            <div className="relative z-10 container mx-auto max-w-7xl px-6 pb-16 md:pb-24">
+            <motion.div style={{ y: textY, opacity: textOpacity }} className="relative z-10 container mx-auto max-w-7xl px-6 pb-16 md:pb-24 will-change-transform">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -92,7 +106,7 @@ export default function Hero() {
                         </MagneticButton>
                     </motion.div>
                 </motion.div>
-            </div>
+            </motion.div>
 
             {/* Fondu vers la section suivante (même couleur que le haut du portfolio) + repère de défilement */}
             <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-dark z-20 pointer-events-none" />
