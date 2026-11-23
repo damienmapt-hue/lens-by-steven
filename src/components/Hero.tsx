@@ -43,9 +43,9 @@ export default function Hero() {
 
             {/* Voiles : haut (menu) et bas (texte) */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-dark/80 via-dark/5 via-30% to-transparent md:to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-[62%] md:h-[44%] pointer-events-none bg-gradient-to-t from-dark via-dark/85 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[70%] md:h-[56%] pointer-events-none bg-gradient-to-t from-dark from-15% via-dark/75 via-50% to-transparent" />
 
-            <div className="relative z-10 container mx-auto max-w-7xl px-6 pb-10 md:pb-14">
+            <div className="relative z-10 container mx-auto max-w-7xl px-6 pb-16 md:pb-24">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -53,7 +53,7 @@ export default function Hero() {
                     className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
                 >
                     <div className="max-w-3xl">
-                        <motion.div variants={itemVariants} className="font-serif font-medium text-gold text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_1px_10px_rgba(13,21,32,0.9)]">
+                        <motion.div variants={itemVariants} className="font-serif font-medium text-gold text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
                             Photographe · Auch, Occitanie
                         </motion.div>
                         <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-[2.9rem] lg:text-5xl leading-[1.08] tracking-tight">
@@ -89,8 +89,17 @@ export default function Hero() {
                 </motion.div>
             </div>
 
-            {/* Transition vers le portfolio */}
-            <div className="absolute bottom-0 left-0 w-full h-[40px] bg-navy [clip-path:polygon(0_60%,100%_0%,100%_100%,0_100%)] z-20 pointer-events-none" />
+            {/* Fondu vers la section suivante (même couleur que le haut du portfolio) + repère de défilement */}
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-dark z-20 pointer-events-none" />
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 hidden lg:flex flex-col items-center gap-3 pointer-events-none"
+            >
+                <span className="font-serif text-gold text-[10px] tracking-[0.4em] uppercase opacity-80">Défiler</span>
+                <span className="block w-px h-10 bg-gradient-to-b from-gold to-transparent" />
+            </motion.div>
         </section>
     );
 }
