@@ -49,7 +49,6 @@ const mariagePhotos = mk("mariage", "mariage", [
     ["/portfolio/series/mariage/mariage-02.jpg", 1333, 2000, "Les mariés et les enfants d'honneur"],
     ["/portfolio/series/mariage/mariage-03.jpg", 1333, 2000, "Un baiser de la famille"],
     ["/portfolio/series/mariage/mariage-19.jpg", 1333, 2000, "Le détail de la montre"],
-    ["/portfolio/series/mariage/mariage-17.jpg", 1333, 2000, "Un invité photographe"],
     ["/portfolio/series/mariage/mariage-23.jpg", 1333, 2000, "La mariée dans la voiture de collection"],
     ["/portfolio/series/mariage/mariage-22.jpg", 2000, 1333, "Les témoins autour de la voiture"],
     ["/portfolio/series/mariage/mariage-21.jpg", 2000, 1333, "Le cortège devant la voiture"],
