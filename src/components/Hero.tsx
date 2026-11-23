@@ -11,10 +11,7 @@ export default function Hero() {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.2,
-            },
+            transition: { staggerChildren: 0.2, delayChildren: 0.2 },
         },
     };
 
@@ -24,49 +21,56 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative h-[100dvh] w-full flex items-center justify-start overflow-hidden">
+        <section className="relative min-h-[100dvh] w-full overflow-hidden bg-dark flex flex-col justify-end">
+            {/* Photo : cadrée en entier sur mobile, plein écran sur ordinateur */}
             <motion.div
-                initial={{ scale: 1.1, filter: "brightness(0.5)" }}
+                initial={{ scale: 1.06, filter: "brightness(0.5)" }}
                 animate={{ scale: 1, filter: "brightness(1)" }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute inset-0 z-0 origin-center"
+                className="absolute inset-x-0 top-[72px] aspect-[3/2] md:inset-0 md:top-0 md:aspect-auto origin-center [mask-image:linear-gradient(to_bottom,black_72%,transparent)] md:[mask-image:none]"
             >
                 <Image
-                    src="/portfolio/hero-basketball-bw.jpg"
-                    alt="Photographe sportif à Auch — action basketball par Steven Dufour"
+                    src="/portfolio/series/mariage/mariage-22.jpg"
+                    alt="Mariés, témoins et invités autour d'une voiture de collection verte — mariage dans le Gers photographié par Steven Dufour"
                     fill
                     priority
-                    className="object-cover"
+                    quality={85}
+                    className="object-cover object-bottom"
                     sizes="100vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/30" />
-                <div className="absolute inset-0 bg-dark/60 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-navy/20 mix-blend-multiply" />
             </motion.div>
 
-            <div className="container mx-auto px-6 max-w-5xl relative z-10">
+            {/* Voiles : haut (menu) et bas (texte) */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-dark/80 via-dark/5 via-30% to-transparent md:to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[62%] md:h-[44%] pointer-events-none bg-gradient-to-t from-dark via-dark/85 to-transparent" />
+
+            <div className="relative z-10 container mx-auto max-w-7xl px-6 pb-10 md:pb-14">
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-4xl pt-24 md:pt-20"
+                    className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
                 >
-                    <motion.div variants={itemVariants} className="font-serif text-gold font-medium text-[10px] md:text-sm tracking-[0.2em] md:tracking-[0.4em] uppercase mb-6 md:mb-10">
-                        Photographe Professionnel · Auch, Occitanie
-                    </motion.div>
-                    <motion.h1 variants={itemVariants} className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[90px] font-medium leading-[1.1] md:leading-[1] tracking-tight mb-8 md:mb-12">
-                        <span className="text-white block">Capturer l&apos;instant.</span>
-                        <span className="text-gold block">Révéler l&apos;émotion.</span>
-                    </motion.h1>
-                    <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-xl font-light mb-10 md:mb-16 max-w-2xl leading-relaxed">
-                        Steven Dufour immortalise vos moments avec une sensibilité unique — sport, portrait, entreprise, événementiel.
-                    </motion.p>
+                    <div className="max-w-3xl">
+                        <motion.div variants={itemVariants} className="font-serif font-medium text-gold text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_1px_10px_rgba(13,21,32,0.9)]">
+                            Photographe · Auch, Occitanie
+                        </motion.div>
+                        <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-[2.9rem] lg:text-5xl leading-[1.08] tracking-tight">
+                            <span className="text-white md:inline block">Capturer l&apos;instant.</span>{" "}
+                            <span className="text-gold md:inline block">Révéler l&apos;émotion.</span>
+                        </motion.h1>
+                        <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-lg font-light mt-4 max-w-xl leading-relaxed">
+                            Mariages, concerts, sport, portraits : des images qui ressemblent à ceux qui les vivent.
+                        </motion.p>
+                    </div>
 
-                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-8">
+                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 shrink-0">
                         <MagneticButton className="w-full sm:w-auto">
                             <Link
                                 href="#travail"
                                 data-cursor="DÉCOUVRIR"
-                                className="group flex items-center justify-center gap-3 px-8 py-4 border border-gold text-gold hover:bg-gold hover:text-navy transition-all duration-300 uppercase tracking-widest text-sm font-medium w-full text-center"
+                                className="group flex items-center justify-center gap-3 px-8 py-4 bg-gold text-dark hover:bg-white transition-colors duration-300 uppercase tracking-widest text-sm font-medium w-full text-center"
                             >
                                 Voir mon travail
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -85,19 +89,8 @@ export default function Hero() {
                 </motion.div>
             </div>
 
-            {/* Scroll Indicator - Hidden on small mobile to avoid overlap */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-4 z-10"
-            >
-                <span className="font-serif text-gold text-[10px] tracking-[0.4em] uppercase opacity-70">Défiler</span>
-                <div className="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent" />
-            </motion.div>
-
-            {/* Section Divider to Portfolio (Navy) */}
-            <div className="absolute bottom-0 left-0 w-full h-[80px] bg-navy [clip-path:polygon(0_40%,100%_0%,100%_100%,0_100%)] z-20 pointer-events-none" />
+            {/* Transition vers le portfolio */}
+            <div className="absolute bottom-0 left-0 w-full h-[40px] bg-navy [clip-path:polygon(0_60%,100%_0%,100%_100%,0_100%)] z-20 pointer-events-none" />
         </section>
     );
 }
