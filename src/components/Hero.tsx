@@ -8,7 +8,7 @@ import MagneticButton from "./MagneticButton";
 
 const imageBase = { alt: "", fill: true, priority: true, quality: 85, sizes: "100vw" } as const;
 const { props: { srcSet: desktopSrcSet } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-22.jpg" });
-const { props: { srcSet: mobileSrcSet, alt: _alt, ...mobileImg } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-24.jpg" });
+const { props: { srcSet: mobileSrcSet, ...mobileImg } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-24.jpg" });
 
 export default function Hero() {
     const containerVariants: Variants = {
