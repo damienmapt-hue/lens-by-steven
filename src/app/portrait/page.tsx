@@ -28,7 +28,10 @@ export default function PortraitPage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
-                heroSrc="/portfolio/portrait-allonge-nb.jpg"
+                heroSrc="/portfolio/portrait-rose-doree.jpeg"
+                heroPosition="50% 30%"
+                priceFrom="Dès 50 €"
+                galleryHref="/portfolio/portraits"
                 heroAlt="Portrait artistique noir et blanc à Auch par Steven Dufour photographe"
                 badge="Portraits · Auch, Gers"
                 h1="Portraits Authentiques à Auch"

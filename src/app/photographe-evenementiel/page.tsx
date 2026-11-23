@@ -28,7 +28,10 @@ export default function PhotographeEvenementielPage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
-                heroSrc="/portfolio/evenement-bouteilles-parasol.jpg"
+                heroSrc="/portfolio/series/scene/scene-10.jpg"
+                heroPosition="50% 35%"
+                priceFrom="Dès 150 €"
+                galleryHref="/portfolio/scene"
                 heroAlt="Photographe événementiel à Auch — cocktail et reportage par Steven Dufour"
                 badge="Événementiel · Auch, Gers"
                 h1="Photographe Événementiel à Auch"
@@ -45,11 +48,14 @@ export default function PhotographeEvenementielPage() {
                     "Anniversaires et événements privés dans le Gers",
                 ]}
                 photos={[
-                    { src: "/portfolio/evenement-bouteilles-parasol.jpg", alt: "Cocktail événementiel Auch — Steven Dufour" },
-                    { src: "/portfolio/event-table.jpg", alt: "Décoration événementielle Gers — Steven Dufour" },
-                    { src: "/portfolio/evenement-mains.jpg", alt: "Détail émotion événement Auch — Steven Dufour" },
-                    { src: "/portfolio/evenement-conference-nb.jpg", alt: "Conférence corporate Auch — Steven Dufour" },
-                    { src: "/portfolio/evenement-sourire.jpg", alt: "Reportage sourires événement Gers — Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-10.jpg", alt: "La chanteuse sur scène sous les projecteurs — photographe événementiel Auch, Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-09.jpg", alt: "Guitariste dans la fumée colorée — concert dans le Gers, Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-11.jpg", alt: "Voix et lumières — photographe de concert à Auch, Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-07.jpg", alt: "Chanteur au micro sous une lumière violette — Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-08.jpg", alt: "Guitare sur scène — reportage de concert, Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-05.jpg", alt: "Élection de Miss, la lauréate sur scène — événement dans le Gers, Steven Dufour" },
+                    { src: "/portfolio/series/scene/scene-06.jpg", alt: "Miss et dauphine, bouquets en main — Steven Dufour photographe événementiel" },
+                    { src: "/portfolio/series/scene/scene-12.jpg", alt: "Mains jointes, bracelets de festival — événement dans le Gers, Steven Dufour" },
                 ]}
                 faq={[
                     {

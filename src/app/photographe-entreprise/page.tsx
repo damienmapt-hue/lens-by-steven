@@ -29,6 +29,9 @@ export default function PhotographeEntreprisePage() {
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
                 heroSrc="/portfolio/entreprise-bureau.jpg"
+                heroPosition="50% 50%"
+                priceFrom="Dès 120 €"
+                galleryHref="/portfolio/portraits"
                 heroAlt="Photographe d'entreprise à Auch — reportage corporate Steven Dufour"
                 badge="Entreprises & Commerces · Auch, Gers"
                 h1="Photographe d'Entreprise à Auch"

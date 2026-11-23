@@ -28,7 +28,10 @@ export default function PhotographieSportivePage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
-                heroSrc="/portfolio/sport-action-duo-nb.jpg"
+                heroSrc="/portfolio/series/sport/sport-40.jpg"
+                heroPosition="50% 55%"
+                priceFrom="Dès 25 €"
+                galleryHref="/portfolio/sport"
                 heroAlt="Photographe sportif à Auch — action basketball par Steven Dufour"
                 badge="Photographe Sportif · Auch, Gers"
                 h1="Photographie Sportive à Auch"
@@ -45,12 +48,14 @@ export default function PhotographieSportivePage() {
                     "Déplacements dans toute l'Occitanie",
                 ]}
                 photos={[
-                    { src: "/portfolio/sport-action-duo-nb.jpg", alt: "Action basketball intense à Auch — Steven Dufour" },
-                    { src: "/portfolio/team-huddle.jpg", alt: "Sport collectif à Auch — photographe Steven Dufour" },
-                    { src: "/portfolio/basketball-back.jpg", alt: "Basketball Auch — Steven Dufour Photography" },
-                    { src: "/portfolio/player-walk.jpg", alt: "Joueur de basketball à Auch — Steven Dufour" },
-                    { src: "/portfolio/sport-boxing.jpeg", alt: "Boxe à Auch — shooting sportif Steven Dufour" },
-                    { src: "/portfolio/sport-goal-drinking.jpeg", alt: "Célébration sportive dans le Gers — Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-40.jpg", alt: "Joueur de football en plein coup de pied sous les projecteurs — Steven Dufour, photographe sportif à Auch" },
+                    { src: "/portfolio/series/sport/sport-34.jpg", alt: "Le gardien de but, sourire avant le match — photographe sportif Gers" },
+                    { src: "/portfolio/series/sport/sport-35.jpg", alt: "Le plongeon du gardien — photographie sportive à Auch, Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-38.jpg", alt: "Duel au milieu du terrain — photographe sportif Gers, Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-39.jpg", alt: "Le ballon disputé — photographie sportive Auch, Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-36.jpg", alt: "La déception, mains sur le visage — reportage sportif Gers, Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-37.jpg", alt: "L'équipe de foot au complet — photo d'équipe à Auch, Steven Dufour" },
+                    { src: "/portfolio/series/sport/sport-41.jpg", alt: "L'équipe en bleu avant le match — photographe sportif Occitanie, Steven Dufour" },
                 ]}
                 faq={[
                     {

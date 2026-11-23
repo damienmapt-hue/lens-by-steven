@@ -28,7 +28,10 @@ export default function PhotographeMariagePage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
-                heroSrc="/portfolio/series/mariage/mariage-21.jpg"
+                heroSrc="/portfolio/series/mariage/mariage-24.jpg"
+                heroPosition="50% 30%"
+                priceFrom="Dès 600 €"
+                galleryHref="/portfolio/mariage"
                 heroAlt="Photographe mariage à Auch dans le Gers — Steven Dufour"
                 badge="Mariage · Auch, Gers"
                 h1="Photographe Mariage à Auch"
@@ -47,10 +50,12 @@ export default function PhotographeMariagePage() {
                 photos={[
                     { src: "/portfolio/series/mariage/mariage-24.jpg", alt: "Le baiser des mariés près d'une voiture de collection — mariage dans le Gers, Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-27.jpg", alt: "Les mariés enlacés sous le voile — photographe mariage Auch, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-21.jpg", alt: "Le cortège de mariage devant la voiture de collection — Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-25.jpg", alt: "Les mains des mariés et le bouquet de callas — Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-31.jpg", alt: "Les mariés en noir et blanc — photographe mariage Occitanie, Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-14.jpg", alt: "Les mariés dans l'escalier — reportage mariage Auch, Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-13.jpg", alt: "Le marié souriant, bouquet en main — Steven Dufour photographe Auch" },
+                    { src: "/portfolio/series/mariage/mariage-32.jpg", alt: "Main dans la main devant une bâtisse en pierre — mariage dans le Gers, Steven Dufour" },
                 ]}
                 faq={[
                     {
