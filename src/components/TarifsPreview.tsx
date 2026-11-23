@@ -82,7 +82,10 @@ export default function TarifsPreview() {
     const cols = active.tiers.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
 
     return (
-        <section id="tarifs" className="relative pt-44 pb-44 md:pt-52 md:pb-52 overflow-hidden scroll-mt-20" style={{ background: "linear-gradient(180deg, #0D1520 0px, #EFE6D5 150px, #EFE6D5 calc(100% - 150px), #0D1520 100%)" }}>
+        <section id="tarifs" className="relative pt-28 pb-32 md:pt-44 md:pb-48 overflow-hidden scroll-mt-20" style={{ background: "#EFE6D5" }}>
+            {/* Diagonale du haut : le sombre de la section précédente descend en biais */}
+            <div aria-hidden className="pointer-events-none absolute -top-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(0_0,100%_0,100%_0,0_100%)]" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
 
             <div className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10">
                 {/* En-tête */}

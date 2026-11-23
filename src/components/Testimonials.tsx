@@ -50,9 +50,12 @@ export default function Testimonials() {
     return (
         <section
             id="temoignages"
-            className="relative pt-44 pb-44 md:pt-52 md:pb-52 scroll-mt-20 overflow-hidden"
-            style={{ background: "linear-gradient(180deg, #0D1520 0px, #E8DCC8 150px, #E8DCC8 calc(100% - 150px), #0D1520 100%)" }}
+            className="relative pt-28 pb-32 md:pt-44 md:pb-48 scroll-mt-20 overflow-hidden"
+            style={{ background: "#E8DCC8" }}
         >
+            {/* Diagonale du haut : le sombre de la section précédente descend en biais */}
+            <div aria-hidden className="pointer-events-none absolute -top-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(0_0,100%_0,100%_0,0_100%)]" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
 
             <div
                 className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10"
