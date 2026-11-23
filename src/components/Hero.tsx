@@ -40,7 +40,7 @@ export default function Hero() {
                     <img
                         {...mobileImg}
                         alt="Mariage dans le Gers près d'une voiture de collection verte, photographié par Steven Dufour"
-                        className="absolute inset-0 h-full w-full object-cover object-[50%_25%] md:object-bottom"
+                        className="absolute inset-0 h-full w-full object-cover object-[50%_25%] md:object-[50%_12%]"
                     />
                 </picture>
                 <div className="absolute inset-0 bg-navy/20 mix-blend-multiply" />
@@ -61,7 +61,7 @@ export default function Hero() {
                         <motion.div variants={itemVariants} className="font-sans font-medium text-[#E6CB7E] text-[11px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
                             Photographe · Auch, Occitanie
                         </motion.div>
-                        <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+                        <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-5xl lg:text-6xl leading-[1.2] tracking-tight">
                             <span className="text-white block">Capturer l&apos;instant.</span>{" "}
                             <span className="text-gold block">Révéler l&apos;émotion.</span>
                         </motion.h1>

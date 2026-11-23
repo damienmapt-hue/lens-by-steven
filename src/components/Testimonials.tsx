@@ -75,7 +75,7 @@ export default function Testimonials() {
                             Témoignages
                         </motion.span>
                         <TextReveal delay={0.1}>
-                            <h2 className="font-display text-[2.2rem] sm:text-5xl lg:text-6xl leading-[1.05] text-navy">
+                            <h2 className="font-display text-[2.2rem] sm:text-5xl lg:text-6xl leading-[1.2] text-navy">
                                 <span className="block">Ce qu&apos;ils</span>
                                 <span className="block text-[#8a6a1c]">disent.</span>
                             </h2>

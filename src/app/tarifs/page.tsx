@@ -133,7 +133,7 @@ export default function TarifsPage() {
                     >
                         Tarifs et prestations
                     </motion.span>
-                    <h1 className="font-display text-[2.2rem] leading-[1.05] sm:text-5xl lg:text-7xl text-white">
+                    <h1 className="font-display text-[2.2rem] leading-[1.2] sm:text-5xl lg:text-7xl text-white">
                         <span className="block whitespace-nowrap">Des prix clairs,</span>
                         <span className="block whitespace-nowrap text-gold">sans surprise.</span>
                     </h1>
@@ -194,7 +194,7 @@ export default function TarifsPage() {
                             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <div className="grid lg:grid-cols-12 gap-4 lg:gap-12 items-end mb-10 md:mb-14">
-                                <h2 className="lg:col-span-7 font-display text-[1.9rem] leading-[1.1] sm:text-5xl text-navy">{active.title}</h2>
+                                <h2 className="lg:col-span-7 font-display text-[1.9rem] leading-[1.2] sm:text-5xl text-navy">{active.title}</h2>
                                 <p className="lg:col-span-5 text-navy/75 leading-relaxed max-w-md">{active.intro}</p>
                             </div>
 
@@ -247,7 +247,7 @@ export default function TarifsPage() {
                         <div className="lg:col-span-5">
                             <span className="block text-gold tracking-[0.3em] text-xs uppercase mb-4">Déplacements</span>
                             <TextReveal delay={0.1}>
-                                <h2 className="font-display text-[1.9rem] sm:text-4xl leading-[1.1] text-white">
+                                <h2 className="font-display text-[1.9rem] sm:text-4xl leading-[1.2] text-white">
                                     <span className="block">Au départ d&apos;Auch,</span>
                                     <span className="block text-gold">partout dans le Gers.</span>
                                 </h2>
@@ -266,7 +266,7 @@ export default function TarifsPage() {
                     <div className="mt-16 md:mt-24 border-t border-white/10 pt-12 md:pt-16 grid lg:grid-cols-12 gap-8 items-center">
                         <div className="lg:col-span-7">
                             <span className="block text-gold tracking-[0.3em] text-xs uppercase mb-4">Devis gratuit</span>
-                            <h2 className="font-display text-[2rem] sm:text-5xl leading-[1.05] text-white">Un projet en tête ?</h2>
+                            <h2 className="font-display text-[2rem] sm:text-5xl leading-[1.2] text-white">Un projet en tête ?</h2>
                             <p className="mt-4 text-cream/85 max-w-md leading-relaxed">Chaque prestation peut être adaptée à vos besoins. Parlez-moi de votre projet, je vous réponds rapidement.</p>
                         </div>
                         <div className="lg:col-span-5 lg:text-right">

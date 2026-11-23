@@ -101,7 +101,7 @@ export default function TarifsPreview() {
                             Tarifs
                         </motion.span>
                         <TextReveal delay={0.1}>
-                            <h2 className="font-display text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[clamp(2.4rem,4.4vw,3.8rem)] text-navy">
+                            <h2 className="font-display text-[1.9rem] leading-[1.2] sm:text-5xl lg:text-[clamp(2.4rem,4.4vw,3.8rem)] text-navy">
                                 <span className="block whitespace-nowrap">Des prix clairs,</span>
                                 <span className="block whitespace-nowrap">sans surprise.</span>
                             </h2>

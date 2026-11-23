@@ -114,7 +114,7 @@ export default function Services() {
                                 Prestations
                             </span>
                             <TextReveal delay={0.1}>
-                                <h2 className="font-display text-[1.65rem] leading-[1.1] sm:text-4xl lg:text-[clamp(2.4rem,4.1vw,3.4rem)] text-white">
+                                <h2 className="font-display text-[1.65rem] leading-[1.25] sm:text-4xl lg:text-[clamp(2.4rem,4.1vw,3.4rem)] text-white">
                                     <span className="block whitespace-nowrap">Cinq façons de</span>
                                     <span className="block whitespace-nowrap">travailler ensemble.</span>
                                 </h2>
@@ -172,7 +172,7 @@ export default function Services() {
                                         <span className="block font-display text-xs text-gold tabular-nums tracking-widest mb-2 md:mb-4">
                                             0{active + 1} / 0{services.length}
                                         </span>
-                                        <h3 className="font-display text-2xl md:text-4xl lg:text-5xl text-white mb-2 md:mb-5 leading-[1.05]">
+                                        <h3 className="font-display text-2xl md:text-4xl lg:text-5xl text-white mb-2 md:mb-5 leading-[1.2]">
                                             {current.title}
                                         </h3>
                                         <p className="text-cream/85 text-sm md:text-base lg:text-lg leading-relaxed font-normal max-w-lg">

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import Lightbox from "./portfolio/Lightbox";
 import CountUp from "./CountUp";
 import TextReveal from "./TextReveal";
 import MagneticButton from "./MagneticButton";
@@ -23,6 +24,7 @@ const strip = [
     mariage.photos[0], scene.photos[0], sport.photos[0], portraits.photos[0],
     mariage.photos[3], scene.photos[1], sport.photos[2], portraits.photos[1],
     mariage.photos[6], scene.photos[4], sport.photos[4], portraits.photos[2],
+    mariage.photos[9], scene.photos[6], sport.photos[7], portraits.photos[3],
 ];
 
 export default function About() {
@@ -31,6 +33,12 @@ export default function About() {
     const yPortrait = useTransform(scrollYProgress, [0, 1], [30, -30]);
     const yA = useTransform(scrollYProgress, [0, 1], [70, -50]);
     const yB = useTransform(scrollYProgress, [0, 1], [-20, 70]);
+
+    // Bandeau de photos : on le fait glisser (doigt ou souris), on clique pour agrandir
+    const rail = useRef<HTMLDivElement>(null);
+    const drag = useRef({ down: false, x: 0, left: 0, moved: false });
+    const [open, setOpen] = useState<number | null>(null);
+    const scrollRail = (dir: number) => rail.current?.scrollBy({ left: dir * 520, behavior: "smooth" });
 
     return (
         <section
@@ -102,7 +110,7 @@ export default function About() {
                         </motion.span>
 
                         <TextReveal delay={0.1}>
-                            <h2 className="font-display text-[2rem] sm:text-5xl lg:text-6xl leading-[1.05] text-white">
+                            <h2 className="font-display text-[2rem] sm:text-5xl lg:text-6xl leading-[1.2] text-white">
                                 <span className="block">Passionné par</span>
                                 <span className="block text-gold">l&apos;instant vrai.</span>
                             </h2>
@@ -180,31 +188,70 @@ export default function About() {
                 </div>
             </div>
 
-            {/* Bandeau de photos qui défile lentement */}
-            <div
-                className="relative mt-24 md:mt-32 pb-20 md:pb-28 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
-                aria-label="Aperçu des réalisations de Steven"
-            >
-                <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-                    {[...strip, ...strip].map((photo, i) => (
-                        <div
-                            key={`${photo.id}-${i}`}
-                            className="relative shrink-0 mr-3 h-[170px] md:h-[240px] overflow-hidden"
+            {/* Bandeau de photos : glisser pour parcourir, cliquer pour agrandir */}
+            <div className="relative mt-24 md:mt-32 pb-20 md:pb-28">
+                <div className="container mx-auto px-5 md:px-8 max-w-7xl mb-5 flex items-end justify-between">
+                    <p className="text-xs uppercase tracking-[0.3em] text-cream/70">Un aperçu de mon travail</p>
+                    <div className="hidden md:flex gap-2">
+                        <button type="button" onClick={() => scrollRail(-1)} aria-label="Photos précédentes" className="w-11 h-11 flex items-center justify-center border border-white/25 text-white hover:bg-gold hover:text-dark hover:border-gold transition-colors">
+                            <ArrowLeft className="w-4 h-4" />
+                        </button>
+                        <button type="button" onClick={() => scrollRail(1)} aria-label="Photos suivantes" className="w-11 h-11 flex items-center justify-center border border-white/25 text-white hover:bg-gold hover:text-dark hover:border-gold transition-colors">
+                            <ArrowRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+                <div
+                    ref={rail}
+                    className="flex gap-3 overflow-x-auto px-5 md:px-8 pb-2 cursor-grab active:cursor-grabbing select-none snap-x snap-proximity [&::-webkit-scrollbar]:hidden"
+                    style={{ scrollbarWidth: "none" }}
+                    aria-label="Aperçu des réalisations de Steven"
+                    onPointerDown={(e) => {
+                        if (e.pointerType !== "mouse") return;
+                        drag.current = { down: true, x: e.clientX, left: rail.current?.scrollLeft ?? 0, moved: false };
+                    }}
+                    onPointerMove={(e) => {
+                        const d = drag.current;
+                        if (!d.down || !rail.current) return;
+                        const dx = e.clientX - d.x;
+                        if (Math.abs(dx) > 5) d.moved = true;
+                        rail.current.scrollLeft = d.left - dx;
+                    }}
+                    onPointerUp={() => { drag.current.down = false; }}
+                    onPointerLeave={() => { drag.current.down = false; }}
+                >
+                    {strip.map((photo, i) => (
+                        <button
+                            key={photo.id}
+                            type="button"
+                            onClick={() => { if (!drag.current.moved) setOpen(i); }}
+                            aria-label={`Agrandir la photo : ${photo.alt}`}
+                            className="group relative shrink-0 snap-start h-[200px] md:h-[280px] overflow-hidden"
                             style={{ aspectRatio: photo.w / photo.h }}
-                            aria-hidden={i >= strip.length}
                         >
                             <Image
                                 src={photo.src}
-                                alt={i < strip.length ? photo.alt : ""}
+                                alt={photo.alt}
                                 fill
                                 quality={75}
-                                sizes="(max-width: 768px) 130px, 200px"
-                                className="object-cover"
+                                draggable={false}
+                                sizes="(max-width: 768px) 200px, 300px"
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                        </div>
+                        </button>
                     ))}
                 </div>
             </div>
+
+            {open !== null && (
+                <Lightbox
+                    photos={strip}
+                    currentIndex={open}
+                    onClose={() => setOpen(null)}
+                    onNext={() => setOpen((o) => (o === null ? o : (o + 1) % strip.length))}
+                    onPrev={() => setOpen((o) => (o === null ? o : (o - 1 + strip.length) % strip.length))}
+                />
+            )}
         </section>
     );
 }

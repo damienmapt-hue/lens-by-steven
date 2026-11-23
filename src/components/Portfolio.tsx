@@ -22,7 +22,7 @@ export default function Portfolio() {
                         Portfolio
                     </motion.span>
                     <TextReveal delay={0.1}>
-                        <h2 className="text-4xl md:text-6xl font-display text-white mt-4 leading-[1.08]">
+                        <h2 className="text-4xl md:text-6xl font-display text-white mt-4 leading-[1.2]">
                             Quatre univers,<br />un même regard.
                         </h2>
                     </TextReveal>
@@ -45,7 +45,7 @@ export default function Portfolio() {
                                     <p className="text-gold/80 text-xs tracking-[0.35em] uppercase mb-3">
                                         {s.index} — {s.kicker}
                                     </p>
-                                    <h3 id={`serie-${s.slug}`} className="font-display text-4xl md:text-6xl text-white leading-[1.05]">
+                                    <h3 id={`serie-${s.slug}`} className="font-display text-4xl md:text-6xl text-white leading-[1.2]">
                                         {s.title}
                                     </h3>
                                 </div>
