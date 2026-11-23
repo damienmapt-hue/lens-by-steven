@@ -38,8 +38,8 @@ const services: Service[] = [
         short: "Événementiel",
         description: "Concerts, galas, conférences, fêtes : l'énergie de la salle et les instants qu'on ne vit qu'une fois, avec discrétion.",
         tags: ["Concerts", "Galas", "Soirées privées"],
-        photo: "/portfolio/series/scene/scene-09.jpg",
-        alt: "Guitariste sur scène dans la fumée colorée",
+        photo: "/portfolio/series/scene/scene-10.jpg",
+        alt: "Chanteuse sur scène sous les projecteurs",
         position: "50% 40%",
     },
     {
