@@ -1,373 +1,284 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { Camera, User, Briefcase, CalendarHeart, Heart, Car, Check, Mail, ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TextReveal from "@/components/TextReveal";
 
-const categories = [
-    { id: "sport", label: "Sport", icon: Camera },
-    { id: "portrait", label: "Portrait", icon: User },
-    { id: "entreprise", label: "Entreprise", icon: Briefcase },
-    { id: "evenementiel", label: "Événementiel", icon: CalendarHeart },
-    { id: "mariage", label: "Mariage", icon: Heart },
+interface Tier {
+    name: string;
+    tagline: string;
+    price: string;
+    from?: boolean;
+    note?: string;
+    items: string[];
+    featured?: boolean;
+}
+
+interface Category {
+    id: string;
+    label: string;
+    title: string;
+    intro: string;
+    note: string;
+    options?: string[];
+    tiers: Tier[];
+}
+
+const categories: Category[] = [
+    {
+        id: "mariage",
+        label: "Mariage",
+        title: "Mariage",
+        intro: "Chaque mariage est unique. Ces collections s'adaptent à votre journée, de la cérémonie à la soirée.",
+        note: "Des options peuvent compléter la collection choisie.",
+        options: ["Séance engagement", "Séance Day After", "Album photo", "Heures supplémentaires", "Deuxième photographe"],
+        tiers: [
+            { name: "Collection Essentielle", tagline: "L'essentiel du jour J", price: "600 €", from: true, items: ["Cérémonie", "Photos de couple", "Photos de groupe", "Moments importants", "Photos retouchées", "Galerie numérique"] },
+            { name: "Collection Journée", tagline: "Du matin au cocktail", price: "950 €", from: true, featured: true, items: ["Préparatifs + cérémonie", "Photos de couple", "Photos de groupe", "Cocktail + début de réception", "Photos retouchées", "Galerie numérique"] },
+            { name: "Collection Intégrale", tagline: "Journée complète", price: "1 300 €", from: true, items: ["Des préparatifs à la soirée", "Cérémonie complète", "Photos de couple", "Cocktail, réception, soirée", "Photos retouchées", "Galerie numérique complète"] },
+        ],
+    },
+    {
+        id: "evenementiel",
+        label: "Événementiel",
+        title: "Événementiel",
+        intro: "Anniversaire, soirée, inauguration, événement associatif ou professionnel. Facturation au temps de présence.",
+        note: "Au-delà de 6 heures, le tarif est établi sur devis personnalisé.",
+        tiers: [
+            { name: "2 heures", tagline: "Événement court", price: "150 €", items: ["Jusqu'à 2 h de présence", "Reportage de l'événement", "Sélection des meilleures images", "Photos retouchées", "Galerie numérique"] },
+            { name: "4 heures", tagline: "Reportage complet", price: "250 €", featured: true, items: ["Jusqu'à 4 h de présence", "Reportage complet", "Moments forts et détails", "Photos retouchées", "Galerie numérique"] },
+            { name: "6 heures", tagline: "Grande journée", price: "350 €", items: ["Jusqu'à 6 h de présence", "Reportage complet", "Photos de groupe et spontanées", "Photos retouchées", "Galerie numérique"] },
+        ],
+    },
+    {
+        id: "sport",
+        label: "Sport",
+        title: "Photographie sportive",
+        intro: "Le tarif reflète le temps de présence, le type de sport et le travail de retouche.",
+        note: "Collaborations : tarif préférentiel pour les clubs et sportifs en échange d'une utilisation des images, étudié au cas par cas.",
+        tiers: [
+            { name: "Pack Découverte", tagline: "Idéal pour démarrer", price: "25 €", items: ["Présence sur la rencontre", "5 photos retouchées", "Sélection des meilleures images", "Livraison numérique HD"] },
+            { name: "Pack Joueur", tagline: "Plus de souvenirs", price: "40 €", items: ["Présence sur la rencontre", "10 à 15 photos retouchées", "Sélection des meilleures actions", "Livraison numérique HD"] },
+            { name: "Pack Performance", tagline: "Galerie complète", price: "55 €", items: ["Présence sur la rencontre", "20 à 25 photos retouchées", "Actions et moments forts", "Galerie complète"] },
+            { name: "Formule Équipe", tagline: "Clubs et associations", price: "100 €", from: true, featured: true, note: "Selon sport, durée et nombre de joueurs", items: ["Photos d'action", "Photos individuelles", "Photo d'équipe", "Avant et après-match", "Galerie numérique complète"] },
+        ],
+    },
+    {
+        id: "portrait",
+        label: "Portrait",
+        title: "Portraits authentiques",
+        intro: "Séances naturelles pour mettre en valeur une personne, un couple ou un projet.",
+        note: "Photo supplémentaire : 8 €, achat possible après la séance.",
+        tiers: [
+            { name: "Portrait Essentiel", tagline: "Séance courte", price: "50 €", items: ["30 à 45 min de séance", "1 personne", "5 photos retouchées", "Livraison numérique"] },
+            { name: "Portrait Standard", tagline: "Séance complète", price: "80 €", featured: true, items: ["Environ 1 h de séance", "Plusieurs poses", "Changement de tenue possible", "10 photos retouchées", "Livraison numérique"] },
+            { name: "Portrait Premium", tagline: "Séance personnalisée", price: "120 €", items: ["Jusqu'à 1 h 30, seul ou en couple", "Plusieurs lieux ou ambiances", "Plusieurs tenues", "Environ 20 photos retouchées", "Livraison numérique"] },
+        ],
+    },
+    {
+        id: "entreprise",
+        label: "Entreprise",
+        title: "Entreprises et commerces",
+        intro: "Valorisez votre image de marque avec des visuels professionnels pour le web et les réseaux.",
+        note: "Une formule mensuelle est possible pour un contenu régulier, sur mesure.",
+        tiers: [
+            { name: "Pack Essentiel", tagline: "Premier pas", price: "120 €", from: true, items: ["Jusqu'à 1 h de prise de vue", "Locaux, équipe, activité", "Environ 10 photos retouchées", "Livraison numérique"] },
+            { name: "Pack Communication", tagline: "Site web et réseaux", price: "200 €", from: true, featured: true, items: ["Jusqu'à 2 h de prise de vue", "Locaux et portraits d'équipe", "Activité, produits, services", "20 à 30 photos retouchées", "Livraison numérique"] },
+            { name: "Pack Premium", tagline: "Banque d'images", price: "350 €", from: true, items: ["Jusqu'à 4 h de prise de vue", "Locaux, équipe, portraits", "Produits et services", "40 à 60 photos retouchées", "Livraison numérique"] },
+        ],
+    },
 ];
 
-function PricingCard({
-    index,
-    badge,
-    title,
-    price,
-    priceNote,
-    items,
-    highlight = false,
-    delay = 0,
-}: {
-    index: number;
-    badge: string;
-    title: string;
-    price: string;
-    priceNote?: string;
-    items: string[];
-    highlight?: boolean;
-    delay?: number;
-}) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay, ease: "easeOut" }}
-            className={`relative flex flex-col rounded-[2px] overflow-hidden group transition-all duration-500 hover:-translate-y-1 ${
-                highlight
-                    ? "bg-gradient-to-br from-navy via-navy/90 to-dark border border-gold/40 glow-gold"
-                    : "bg-gradient-to-br from-white/[0.04] to-dark border border-white/[0.08] hover:border-gold/20"
-            }`}
-        >
-            {/* Numéro en fond */}
-            <span className="absolute top-4 right-5 font-display text-7xl font-bold text-white/[0.04] leading-none select-none pointer-events-none">
-                {String(index).padStart(2, "0")}
-            </span>
-
-            {/* Gold top line on highlight */}
-            {highlight && <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />}
-
-            <div className="p-7 md:p-8 flex flex-col flex-1">
-                {/* Badge */}
-                <span className={`inline-block mb-5 text-[11px] uppercase tracking-[0.25em] font-medium w-fit px-3 py-1 rounded-[2px] ${
-                    highlight ? "bg-gold/20 text-gold border border-gold/30" : "bg-white/[0.05] text-cream/82 border border-white/[0.08]"
-                }`}>
-                    {badge}
-                </span>
-
-                {/* Prix — très visible */}
-                <div className="mb-2">
-                    <span className={`font-display font-bold leading-none ${
-                        highlight ? "text-gradient-gold text-5xl md:text-6xl" : "text-white text-4xl md:text-5xl"
-                    }`}>
-                        {price}
-                    </span>
-                </div>
-                {priceNote && (
-                    <p className="text-cream/40 text-xs mb-4 font-normal">{priceNote}</p>
-                )}
-
-                {/* Titre */}
-                <p className="font-display text-sm font-bold uppercase tracking-[0.12em] text-cream/82 mb-5">
-                    {title}
-                </p>
-
-                <div className="w-8 h-px bg-gold/30 mb-5 group-hover:w-16 transition-all duration-500" />
-
-                {/* Items */}
-                <ul className="space-y-2.5 flex-1">
-                    {items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-cream/85 text-sm font-normal leading-relaxed">
-                            <Check className="w-3.5 h-3.5 text-gold/60 mt-0.5 shrink-0" strokeWidth={2.5} />
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </motion.div>
-    );
-}
-
-function SectionTitle({ children, sub }: { children: React.ReactNode; sub?: string }) {
-    return (
-        <div className="mb-14 text-center">
-            <h2 className="font-display font-bold text-5xl md:text-6xl text-white leading-tight mb-3">{children}</h2>
-            {sub && <p className="text-cream/80 font-normal text-sm max-w-xl mx-auto leading-relaxed">{sub}</p>}
-        </div>
-    );
-}
+const travel = [
+    { range: "0 – 15 km", price: "Inclus", strong: true },
+    { range: "15 – 30 km", price: "+ 5 €" },
+    { range: "30 – 50 km", price: "+ 10 €" },
+    { range: "Au-delà de 50 km", price: "Sur devis" },
+];
 
 export default function TarifsPage() {
-    const [activeTab, setActiveTab] = useState("sport");
+    const [activeId, setActiveId] = useState(categories[0].id);
+    const active = categories.find((c) => c.id === activeId) ?? categories[0];
+    const cols = active.tiers.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
 
     return (
-        <main className="min-h-screen bg-dark text-white font-sans selection:bg-gold/30 selection:text-navy overflow-x-hidden">
+        <main className="min-h-screen bg-dark text-white font-sans selection:bg-gold/30 selection:text-navy overflow-x-clip">
             <Navbar />
 
-            {/* Hero */}
-            <section className="relative pt-40 pb-24 md:pt-52 md:pb-28 px-6 overflow-hidden">
-                {/* Gradient glow arrière-plan */}
-                <div className="absolute inset-0 bg-gradient-to-br from-dark via-navy/40 to-dark pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
+            {/* En-tête avec photo */}
+            <section className="relative min-h-[62dvh] flex items-end pt-36 pb-24 md:pb-32 overflow-hidden">
+                <Image
+                    src="/portfolio/series/mariage/mariage-22.jpg"
+                    alt=""
+                    fill
+                    priority
+                    quality={80}
+                    sizes="100vw"
+                    className="object-cover object-[50%_35%]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/70 to-dark/40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-dark/80 via-dark/30 to-transparent" />
 
-                <div className="container mx-auto max-w-3xl relative z-10 text-center">
+                <div className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10">
+                    <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="block text-[#E6CB7E] font-medium tracking-[0.35em] text-xs uppercase mb-5"
+                    >
+                        Tarifs et prestations
+                    </motion.span>
+                    <h1 className="font-display text-[2.2rem] leading-[1.05] sm:text-5xl lg:text-7xl text-white">
+                        <span className="block whitespace-nowrap">Des prix clairs,</span>
+                        <span className="block whitespace-nowrap text-gold">sans surprise.</span>
+                    </h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="font-serif text-xs uppercase tracking-[0.35em] text-gold/70 mb-6"
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="mt-6 max-w-lg text-cream/90 text-base md:text-lg leading-relaxed"
                     >
-                        Lens by Steven · Photographe à Auch
-                    </motion.p>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="font-display font-bold text-6xl md:text-8xl text-white leading-[0.95] mb-6"
-                    >
-                        Tarifs &{" "}
-                        <span className="text-gradient-gold">Prestations</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-cream/82 font-normal max-w-lg mx-auto leading-relaxed"
-                    >
-                        Tarifs transparents et accessibles. Chaque prestation peut être adaptée — devis personnalisé gratuit sur demande.
+                        Des tarifs transparents et accessibles. Chaque prestation peut être adaptée, le devis personnalisé est gratuit.
                     </motion.p>
                 </div>
             </section>
 
-            {/* Séparateur dégradé */}
-            <div className="w-full h-px gold-line opacity-30" />
+            {/* Formules, sur fond beige entre deux diagonales */}
+            <section className="relative pt-28 pb-32 md:pt-44 md:pb-48 overflow-hidden" style={{ background: "#EFE6D5" }}>
+                <div aria-hidden className="pointer-events-none absolute -top-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(0_0,100%_0,100%_0,0_100%)]" />
+                <div aria-hidden className="pointer-events-none absolute -bottom-px inset-x-0 h-[60px] md:h-[110px] bg-dark [clip-path:polygon(100%_0,100%_100%,0_100%)]" />
 
-            {/* Tabs */}
-            <div className="sticky top-[72px] z-40 bg-dark/95 backdrop-blur-md border-b border-white/[0.05] px-6 py-4">
-                <div className="container mx-auto max-w-5xl">
-                    <div className="flex gap-2 overflow-x-auto scrollbar-none flex-wrap justify-center">
-                        {categories.map(({ id, label, icon: Icon }) => (
-                            <button
-                                key={id}
-                                onClick={() => setActiveTab(id)}
-                                className={`flex items-center gap-2 px-5 py-2.5 text-xs uppercase tracking-[0.18em] font-bold border rounded-[2px] transition-all duration-300 whitespace-nowrap ${
-                                    activeTab === id
-                                        ? "border-gold text-gold bg-gold/[0.08]"
-                                        : "border-white/10 text-cream/40 hover:border-white/25 hover:text-cream/70"
-                                }`}
-                            >
-                                <Icon className="w-3.5 h-3.5" strokeWidth={1.5} />
-                                {label}
-                            </button>
-                        ))}
+                <div className="container mx-auto px-5 md:px-8 max-w-7xl relative z-10">
+                    {/* Sélecteur */}
+                    <div
+                        role="tablist"
+                        aria-label="Type de prestation"
+                        className="flex gap-2 overflow-x-auto pb-2 mb-10 md:mb-14 [&::-webkit-scrollbar]:hidden"
+                        style={{ scrollbarWidth: "none" }}
+                    >
+                        {categories.map((c) => {
+                            const on = c.id === activeId;
+                            return (
+                                <button
+                                    key={c.id}
+                                    role="tab"
+                                    aria-selected={on}
+                                    onClick={() => setActiveId(c.id)}
+                                    className={`relative shrink-0 px-5 md:px-7 py-3 text-xs uppercase tracking-[0.2em] transition-colors duration-300 min-h-[44px] ${on ? "text-dark" : "text-navy/70 hover:text-navy"}`}
+                                >
+                                    {on && (
+                                        <motion.span
+                                            layoutId="tarifs-page-tab"
+                                            className="absolute inset-0 bg-gold"
+                                            transition={{ type: "spring", stiffness: 400, damping: 36 }}
+                                        />
+                                    )}
+                                    {!on && <span className="absolute inset-0 border border-navy/25" />}
+                                    <span className="relative font-medium">{c.label}</span>
+                                </button>
+                            );
+                        })}
                     </div>
-                </div>
-            </div>
 
-            {/* Content */}
-            <section className="bg-gradient-to-b from-dark via-navy/20 to-dark">
-                <div className="container mx-auto px-6 max-w-5xl py-20">
-
-                    {/* SPORT */}
-                    {activeTab === "sport" && (
-                        <div>
-                            <SectionTitle sub="Le tarif reflète le temps de présence, le type de sport et le travail de retouche.">
-                                Photographie Sportive
-                            </SectionTitle>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                <PricingCard index={1} badge="Pack Découverte" title="Idéal pour démarrer" price="25 €"
-                                    items={["Présence sur la rencontre", "5 photos retouchées", "Sélection des meilleures images", "Livraison numérique HD"]}
-                                    delay={0} />
-                                <PricingCard index={2} badge="Pack Joueur" title="Plus de souvenirs" price="40 €"
-                                    items={["Présence sur la rencontre", "10 à 15 photos retouchées", "Sélection des meilleures actions", "Livraison numérique HD"]}
-                                    delay={0.05} />
-                                <PricingCard index={3} badge="Pack Performance" title="Galerie complète" price="55 €"
-                                    items={["Présence sur la rencontre", "20 à 25 photos retouchées", "Actions et moments forts", "Galerie complète", "Livraison numérique HD"]}
-                                    delay={0.1} />
-                                <PricingCard index={4} badge="Formule Équipe" title="Clubs & associations" price="Dès 100 €"
-                                    priceNote="Selon sport, durée et nombre de joueurs"
-                                    items={["Photos d'action", "Photos individuelles", "Photo d'équipe", "Avant et après-match", "Galerie numérique complète"]}
-                                    highlight delay={0.15} />
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={active.id}
+                            initial={{ opacity: 0, y: 24 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -12 }}
+                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <div className="grid lg:grid-cols-12 gap-4 lg:gap-12 items-end mb-10 md:mb-14">
+                                <h2 className="lg:col-span-7 font-display text-[1.9rem] leading-[1.1] sm:text-5xl text-navy">{active.title}</h2>
+                                <p className="lg:col-span-5 text-navy/75 leading-relaxed max-w-md">{active.intro}</p>
                             </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}
-                                className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 flex items-center gap-4">
-                                <span className="text-gold text-xl">🤝</span>
-                                <p className="text-cream/82 text-sm font-normal">
-                                    <strong className="text-cream/80 font-medium">Collaborations</strong> — tarif préférentiel pour clubs et sportifs en échange d&apos;utilisation des images. Chaque demande étudiée au cas par cas.
-                                </p>
-                            </motion.div>
-                        </div>
-                    )}
 
-                    {/* PORTRAIT */}
-                    {activeTab === "portrait" && (
-                        <div>
-                            <SectionTitle sub="Séances naturelles pour mettre en valeur une personne, un couple ou un projet.">
-                                Portraits Authentiques
-                            </SectionTitle>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <PricingCard index={1} badge="Portrait Essentiel" title="Séance courte" price="50 €"
-                                    items={["30 à 45 min de séance", "1 personne", "5 photos retouchées", "Livraison numérique"]}
-                                    delay={0} />
-                                <PricingCard index={2} badge="Portrait Standard" title="Séance complète" price="80 €"
-                                    items={["~1h de séance", "1 personne", "Plusieurs poses", "Changement de tenue possible", "10 photos retouchées", "Livraison numérique"]}
-                                    highlight delay={0.05} />
-                                <PricingCard index={3} badge="Portrait Premium" title="Séance personnalisée" price="120 €"
-                                    items={["Jusqu'à 1h30", "1 personne ou couple", "Plusieurs lieux ou ambiances", "Plusieurs tenues", "~20 photos retouchées", "Livraison numérique"]}
-                                    delay={0.1} />
-                            </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                                className="mt-6 border border-gold/20 bg-gold/[0.04] rounded-[2px] p-5 text-center">
-                                <p className="text-cream/85 text-sm font-normal">
-                                    <span className="text-gold font-bold">Photo supplémentaire — 8 €</span>
-                                    <span className="text-cream/40"> · Achat possible après la séance</span>
-                                </p>
-                            </motion.div>
-                        </div>
-                    )}
+                            <ul role="tabpanel" className={`grid grid-cols-1 sm:grid-cols-2 ${cols} border-b border-navy/15 lg:divide-x lg:divide-navy/15`}>
+                                {active.tiers.map((t) => (
+                                    <li
+                                        key={t.name}
+                                        className="relative flex flex-col p-6 md:p-9 border-t border-t-navy/15 sm:[&:nth-child(even)]:border-l sm:[&:nth-child(even)]:border-navy/15 lg:[&:nth-child(even)]:border-l-0 bg-gradient-to-b from-transparent to-transparent data-[featured=true]:from-white/70"
+                                        data-featured={t.featured ? "true" : "false"}
+                                    >
+                                        {t.featured && <span className="absolute -top-px inset-x-0 h-[2px] bg-gold" />}
+                                        <p className="text-[11px] uppercase tracking-[0.25em] text-[#8a6a1c] font-medium mb-1">{t.name}</p>
+                                        <p className="text-navy/60 text-sm mb-5 md:mb-8">{t.tagline}</p>
 
-                    {/* ENTREPRISE */}
-                    {activeTab === "entreprise" && (
-                        <div>
-                            <SectionTitle sub="Valorisez votre image de marque avec des visuels professionnels pour le web et les réseaux.">
-                                Entreprises & Commerces
-                            </SectionTitle>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <PricingCard index={1} badge="Pack Essentiel" title="Premier pas" price="Dès 120 €"
-                                    items={["Jusqu'à 1h de prise de vue", "Photos des locaux", "Photos de l'équipe", "Photos de l'activité", "~10 photos retouchées", "Livraison numérique"]}
-                                    delay={0} />
-                                <PricingCard index={2} badge="Pack Communication" title="Site web & réseaux" price="Dès 200 €"
-                                    items={["Jusqu'à 2h de prise de vue", "Locaux + portraits équipe", "Activité + produits/services", "20 à 30 photos retouchées", "Livraison numérique"]}
-                                    highlight delay={0.05} />
-                                <PricingCard index={3} badge="Pack Premium" title="Banque d'images" price="Dès 350 €"
-                                    items={["Jusqu'à 4h de prise de vue", "Locaux, équipe, portraits", "Produits et services", "40 à 60 photos retouchées", "Livraison numérique"]}
-                                    delay={0.1} />
-                            </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                                className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 text-center">
-                                <p className="text-cream/82 text-sm font-normal">
-                                    <strong className="text-cream/80 font-medium">Formule mensuelle disponible</strong> — contenu régulier pour votre communication. Tarif sur mesure.
-                                </p>
-                            </motion.div>
-                        </div>
-                    )}
+                                        <p className="mb-2 flex items-baseline gap-2 text-navy whitespace-nowrap">
+                                            {t.from && <span className="text-xs uppercase tracking-widest text-navy/60">dès</span>}
+                                            <span className={`font-display text-4xl md:text-6xl ${active.tiers.length === 4 ? "lg:text-5xl" : ""} leading-none tracking-tight tabular-nums`}>{t.price}</span>
+                                        </p>
+                                        <p className="mb-6 md:mb-8 min-h-[1.25rem] text-xs text-navy/60">{t.note}</p>
 
-                    {/* ÉVÉNEMENTIEL */}
-                    {activeTab === "evenementiel" && (
-                        <div>
-                            <SectionTitle sub="Anniversaire, soirée, inauguration, événement associatif ou professionnel. Facturation au temps de présence.">
-                                Événementiel
-                            </SectionTitle>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <PricingCard index={1} badge="2 heures" title="Événement court" price="150 €"
-                                    items={["Jusqu'à 2h de présence", "Reportage de l'événement", "Sélection des meilleures images", "Photos retouchées", "Galerie numérique"]}
-                                    delay={0} />
-                                <PricingCard index={2} badge="4 heures" title="Reportage complet" price="250 €"
-                                    items={["Jusqu'à 4h de présence", "Reportage complet", "Moments forts et détails", "Photos retouchées", "Galerie numérique"]}
-                                    highlight delay={0.05} />
-                                <PricingCard index={3} badge="6 heures" title="Grande journée" price="350 €"
-                                    items={["Jusqu'à 6h de présence", "Reportage complet", "Photos de groupe et spontanées", "Photos retouchées", "Galerie numérique"]}
-                                    delay={0.1} />
-                            </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                                className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5 text-center">
-                                <p className="text-cream/82 text-sm font-normal">
-                                    <strong className="text-cream/80 font-medium">Plus de 6 heures</strong> — tarif établi sur devis personnalisé.
-                                </p>
-                            </motion.div>
-                        </div>
-                    )}
+                                        <ul className="space-y-2.5 md:space-y-3">
+                                            {t.items.map((item) => (
+                                                <li key={item} className="flex gap-3 text-sm text-navy/85 leading-snug">
+                                                    <span className="mt-[0.6em] block h-px w-3 bg-[#8a6a1c] shrink-0" />
+                                                    {item}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))}
+                            </ul>
 
-                    {/* MARIAGE */}
-                    {activeTab === "mariage" && (
-                        <div>
-                            <SectionTitle sub="Chaque mariage est unique. Ces collections s&apos;adaptent à votre journée, de la cérémonie à la soirée.">
-                                Mariage
-                            </SectionTitle>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <PricingCard index={1} badge="Collection Essentielle" title="L'essentiel du jour J" price="Dès 600 €"
-                                    items={["Cérémonie", "Photos de couple", "Photos de groupe", "Moments importants", "Photos retouchées", "Galerie numérique"]}
-                                    delay={0} />
-                                <PricingCard index={2} badge="Collection Journée" title="Du matin au cocktail" price="Dès 950 €"
-                                    items={["Préparatifs + cérémonie", "Photos de couple", "Photos de groupe", "Cocktail + début réception", "Photos retouchées", "Galerie numérique"]}
-                                    highlight delay={0.05} />
-                                <PricingCard index={3} badge="Collection Intégrale" title="Journée complète" price="Dès 1 300 €"
-                                    items={["Préparatifs → soirée", "Cérémonie complète", "Photos de couple", "Cocktail, réception, soirée", "Photos retouchées", "Galerie numérique complète"]}
-                                    delay={0.1} />
-                            </div>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                                className="mt-6 border border-white/[0.06] bg-navy/20 rounded-[2px] p-5">
-                                <p className="text-cream/82 text-sm font-normal text-center mb-3">
-                                    <strong className="text-cream/80 font-medium">Options disponibles</strong>
-                                </p>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                    {["Séance engagement", "Séance Day After", "Album photo", "Heures supplémentaires", "Deuxième photographe"].map((opt) => (
-                                        <span key={opt} className="text-xs border border-gold/20 text-gold/70 px-3 py-1 rounded-[2px]">{opt}</span>
+                            <p className="mt-5 text-sm text-navy/65 max-w-3xl">{active.note}</p>
+                            {active.options && (
+                                <div className="mt-4 flex flex-wrap gap-2">
+                                    {active.options.map((o) => (
+                                        <span key={o} className="text-xs border border-navy/25 text-navy/75 px-3 py-1.5">{o}</span>
                                     ))}
                                 </div>
-                            </motion.div>
-                        </div>
-                    )}
+                            )}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </section>
 
-                    {/* Frais de déplacement */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="mt-16 border border-white/[0.06] bg-gradient-to-br from-navy/30 to-dark rounded-[2px] p-8"
-                    >
-                        <div className="flex items-center gap-3 mb-6">
-                            <Car className="w-5 h-5 text-gold/60" strokeWidth={1.5} />
-                            <h3 className="font-display font-bold text-xl text-white uppercase tracking-wide">Frais de déplacement</h3>
+            {/* Déplacements + contact */}
+            <section className="relative pt-12 pb-24 md:pb-32" style={{ background: "linear-gradient(180deg, #0D1520, #16233b 60%, #1B2A4A)" }}>
+                <div className="container mx-auto px-5 md:px-8 max-w-7xl">
+                    <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                        <div className="lg:col-span-5">
+                            <span className="block text-gold tracking-[0.3em] text-xs uppercase mb-4">Déplacements</span>
+                            <TextReveal delay={0.1}>
+                                <h2 className="font-display text-[1.9rem] sm:text-4xl leading-[1.1] text-white">
+                                    <span className="block">Au départ d&apos;Auch,</span>
+                                    <span className="block text-gold">partout dans le Gers.</span>
+                                </h2>
+                            </TextReveal>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {[
-                                { range: "0 – 15 km", price: "Inclus", highlight: true },
-                                { range: "15 – 30 km", price: "+ 5 €", highlight: false },
-                                { range: "30 – 50 km", price: "+ 10 €", highlight: false },
-                                { range: "> 50 km", price: "Sur devis", highlight: false },
-                            ].map(({ range, price, highlight }) => (
-                                <div key={range} className={`text-center p-5 rounded-[2px] border ${highlight ? "border-gold/30 bg-gold/[0.06]" : "border-white/[0.08] bg-white/[0.03]"}`}>
-                                    <p className={`font-display font-bold text-base md:text-lg mb-1 ${highlight ? "text-gold" : "text-white"}`}>{range}</p>
-                                    <p className={`text-sm font-medium ${highlight ? "text-gold/80" : "text-cream/75"}`}>{price}</p>
-                                </div>
+                        <ul className="lg:col-span-7 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-white/10 pt-8 lg:border-t-0 lg:pt-2">
+                            {travel.map((t) => (
+                                <li key={t.range}>
+                                    <p className="text-cream/70 text-xs uppercase tracking-[0.2em] mb-2">{t.range}</p>
+                                    <p className={`font-display text-2xl md:text-3xl ${t.strong ? "text-gold" : "text-white"}`}>{t.price}</p>
+                                </li>
                             ))}
-                        </div>
-                    </motion.div>
+                        </ul>
+                    </div>
 
-                    {/* CTA */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="mt-16 relative overflow-hidden rounded-[2px] border border-gold/20 bg-gradient-to-br from-navy via-navy/80 to-dark p-10 md:p-14 text-center"
-                    >
-                        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold to-transparent" />
-                        <div className="absolute inset-0 bg-gold/[0.02] pointer-events-none" />
-                        <p className="font-serif text-xs uppercase tracking-[0.35em] text-gold/70 mb-4 relative z-10">Devis gratuit</p>
-                        <h3 className="font-display font-bold text-4xl md:text-5xl text-white mb-4 relative z-10 leading-tight">
-                            Un projet en tête ?
-                        </h3>
-                        <p className="text-cream/80 font-normal mb-8 max-w-md mx-auto relative z-10">
-                            Chaque prestation peut être adaptée à vos besoins spécifiques.
-                        </p>
-                        <Link
-                            href="/#contact"
-                            className="inline-flex items-center gap-3 bg-gold text-dark hover:bg-cream transition-all duration-300 px-10 py-4 uppercase tracking-[0.2em] text-xs font-bold relative z-10"
-                        >
-                            <Mail className="w-4 h-4" />
-                            Contactez Steven
-                            <ArrowRight className="w-4 h-4" />
-                        </Link>
-                    </motion.div>
+                    <div className="mt-16 md:mt-24 border-t border-white/10 pt-12 md:pt-16 grid lg:grid-cols-12 gap-8 items-center">
+                        <div className="lg:col-span-7">
+                            <span className="block text-gold tracking-[0.3em] text-xs uppercase mb-4">Devis gratuit</span>
+                            <h2 className="font-display text-[2rem] sm:text-5xl leading-[1.05] text-white">Un projet en tête ?</h2>
+                            <p className="mt-4 text-cream/85 max-w-md leading-relaxed">Chaque prestation peut être adaptée à vos besoins. Parlez-moi de votre projet, je vous réponds rapidement.</p>
+                        </div>
+                        <div className="lg:col-span-5 lg:text-right">
+                            <Link
+                                href="/#contact"
+                                className="group inline-flex items-center gap-3 px-8 py-4 bg-gold text-dark hover:bg-white transition-colors duration-300 uppercase tracking-widest text-xs font-medium"
+                            >
+                                Contacter Steven
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </section>
 
