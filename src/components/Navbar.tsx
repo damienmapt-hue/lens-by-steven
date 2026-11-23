@@ -61,13 +61,13 @@ export default function Navbar() {
         >
             <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
                 <MagneticButton>
-                    <Link href="/" className={`font-display text-2xl font-bold tracking-wide transition-colors ${getLogoColor()}`}>
+                    <Link href="/" className={`font-display text-2xl font-bold tracking-wide whitespace-nowrap transition-colors ${getLogoColor()}`}>
                         Lens By Steven
                     </Link>
                 </MagneticButton>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex gap-4">
+                <nav className="hidden lg:flex gap-4">
                     {links.map((link) => (
                         <MagneticButton key={link.name}>
                             <Link
@@ -82,7 +82,7 @@ export default function Navbar() {
 
                 {/* Mobile menu toggle */}
                 <button
-                    className={`md:hidden ${getTextColor()} transition-colors`}
+                    className={`lg:hidden ${getTextColor()} transition-colors`}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-label="Toggle menu"
                 >
@@ -103,7 +103,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-navy border-t border-navy/50 overflow-hidden"
+                        className="lg:hidden bg-navy border-t border-navy/50 overflow-hidden"
                     >
                         <div className="flex flex-col px-6 py-4 gap-4">
                             {links.map((link) => (
