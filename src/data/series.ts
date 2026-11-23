@@ -51,7 +51,6 @@ const mariagePhotos = mk("mariage", "mariage", [
     ["/portfolio/series/mariage/mariage-20.jpg", 2000, 1333, "Toute la famille réunie"],
     ["/portfolio/series/mariage/mariage-29.jpg", 1333, 2000, "Promenade dans le parc"],
     ["/portfolio/series/mariage/mariage-30.jpg", 1333, 2000, "Main dans la main en plein champ"],
-    ["/portfolio/series/mariage/mariage-18.jpg", 1333, 2000, "L'ouverture de bal"],
 ]);
 
 const scenePhotos = mk("scene", "concert et événement", [
@@ -104,7 +103,7 @@ export const series: Series[] = [
         title: "Mariages",
         kicker: "Reportages",
         tagline: "Les regards, les mains, les silences. Tout ce qui reste du jour J.",
-        description: "Du premier regard à l'ouverture de bal : un reportage discret et sincère, pensé pour que vous retrouviez l'émotion de votre journée, pas seulement ses images.",
+        description: "Du premier regard à la fin de la soirée : un reportage discret et sincère, pensé pour que vous retrouviez l'émotion de votre journée, pas seulement ses images.",
         seoTitle: "Photographe mariage à Auch et dans le Gers",
         seoDescription: "Reportages de mariage dans le Gers et en Occitanie par Steven Dufour : cérémonie, couple, famille, soirée. Découvrez la série.",
         coverPosition: "50% 30%",
