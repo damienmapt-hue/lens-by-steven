@@ -13,7 +13,7 @@ export default function Portfolio() {
 
                 <div className="mb-16 md:mb-24 max-w-3xl">
                     <motion.span
-                        className="text-gold tracking-[0.35em] text-xs uppercase font-light"
+                        className="text-gold tracking-[0.35em] text-xs uppercase font-normal"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -27,7 +27,7 @@ export default function Portfolio() {
                         </h2>
                     </TextReveal>
                     <motion.p
-                        className="text-cream/80 mt-6 max-w-xl font-light leading-relaxed"
+                        className="text-cream/80 mt-6 max-w-xl font-normal leading-relaxed"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
@@ -50,7 +50,7 @@ export default function Portfolio() {
                                     </h3>
                                 </div>
                                 <div className="md:col-span-5 md:pb-2">
-                                    <p className="text-cream/80 font-light leading-relaxed max-w-sm mb-5">{s.tagline}</p>
+                                    <p className="text-cream/80 font-normal leading-relaxed max-w-sm mb-5">{s.tagline}</p>
                                     <Link
                                         href={`/portfolio/${s.slug}`}
                                         className="group inline-flex items-center gap-3 text-gold uppercase tracking-[0.25em] text-xs border-b border-gold/40 pb-2 hover:border-gold transition-colors"

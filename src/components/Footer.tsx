@@ -10,7 +10,7 @@ export default function Footer() {
                         <Link href="#" className="font-display text-2xl font-bold tracking-wide text-gold inline-block mb-2">
                             Lens By Steven
                         </Link>
-                        <p className="text-cream/50 font-light text-sm italic">
+                        <p className="text-cream/50 font-normal text-sm italic">
                             Steven Dufour Photography
                         </p>
                     </div>

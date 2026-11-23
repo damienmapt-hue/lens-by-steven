@@ -50,13 +50,13 @@ export default function ServicePageLayout({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <span className="font-serif text-gold text-[10px] tracking-[0.4em] uppercase mb-6 block">
+                        <span className="font-serif text-gold text-[11px] tracking-[0.4em] uppercase mb-6 block">
                             {badge}
                         </span>
                         <h1 className="font-display text-4xl sm:text-6xl md:text-7xl text-white leading-tight mb-6">
                             {h1}
                         </h1>
-                        <p className="text-cream/80 text-lg max-w-xl mb-10 font-light leading-relaxed">
+                        <p className="text-cream/80 text-lg max-w-xl mb-10 font-normal leading-relaxed">
                             {intro}
                         </p>
                         <Link
@@ -169,7 +169,7 @@ export default function ServicePageLayout({
                         transition={{ duration: 0.7 }}
                     >
                         <h2 className="font-display text-4xl md:text-5xl text-white mb-4">Un projet en tête ?</h2>
-                        <p className="text-cream/60 mb-10 max-w-sm mx-auto font-light">
+                        <p className="text-cream/60 mb-10 max-w-sm mx-auto font-normal">
                             Contactez Steven pour discuter de votre projet et obtenir un devis gratuit.
                         </p>
                         <Link

@@ -110,7 +110,7 @@ export default function Services() {
                     <div className="container mx-auto max-w-7xl h-full px-5 md:px-8 pt-24 md:pt-28 pb-6 md:pb-10 grid gap-x-12 gap-y-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr_auto] content-start lg:content-stretch">
                         {/* Titre fixe, sur 2 lignes */}
                         <div className="lg:col-span-7">
-                            <span className="block text-gold/80 font-light tracking-[0.35em] text-[10px] md:text-xs uppercase mb-2 md:mb-4">
+                            <span className="block text-gold/80 font-normal tracking-[0.35em] text-[11px] md:text-xs uppercase mb-2 md:mb-4">
                                 Prestations
                             </span>
                             <TextReveal delay={0.1}>
@@ -175,12 +175,12 @@ export default function Services() {
                                         <h3 className="font-display text-2xl md:text-4xl lg:text-5xl text-white mb-2 md:mb-5 leading-[1.05]">
                                             {current.title}
                                         </h3>
-                                        <p className="text-cream/85 text-sm md:text-base lg:text-lg leading-relaxed font-light max-w-lg">
+                                        <p className="text-cream/85 text-sm md:text-base lg:text-lg leading-relaxed font-normal max-w-lg">
                                             {current.description}
                                         </p>
                                         <div className="mt-3 md:mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
                                             {current.tags.map((t) => (
-                                                <span key={t} className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-cream/60">
+                                                <span key={t} className="text-[11px] md:text-xs uppercase tracking-[0.2em] text-cream/60">
                                                     {t}
                                                 </span>
                                             ))}
@@ -222,9 +222,9 @@ export default function Services() {
             </div>
 
             {/* Après la zone fixe : appel à l'action */}
-            <div className="container mx-auto max-w-7xl px-5 md:px-8 pt-6 pb-32 md:pb-52 relative z-10">
+            <div className="container mx-auto max-w-7xl px-5 md:px-8 pt-6 pb-24 md:pb-36 relative z-10">
                 <div className="max-w-xl">
-                    <p className="text-cream/80 font-light leading-relaxed">
+                    <p className="text-cream/80 font-normal leading-relaxed">
                         Chaque prestation a sa page, avec des exemples, les tarifs et les réponses aux questions que l&apos;on me pose le plus souvent.
                     </p>
                     <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8">
@@ -245,9 +245,6 @@ export default function Services() {
                     </div>
                 </div>
             </div>
-
-            {/* Section Divider to Tarifs (Navy) */}
-            <div className="absolute bottom-0 left-0 w-full h-[80px] bg-navy [clip-path:polygon(0_40%,100%_0%,100%_100%,0_100%)] z-20 pointer-events-none" />
         </section>
     );
 }

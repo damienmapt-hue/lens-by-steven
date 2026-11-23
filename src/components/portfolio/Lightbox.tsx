@@ -78,16 +78,16 @@ export default function Lightbox({ photos, currentIndex, onClose, onNext, onPrev
                 {/* Header bar */}
                 <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5">
                     <div className="flex items-center gap-3">
-                        <span className="hidden sm:inline text-gold text-[10px] tracking-[0.3em] uppercase font-light">
+                        <span className="hidden sm:inline text-gold text-[11px] tracking-[0.3em] uppercase font-normal">
                             {getSeries(photo.series)?.title}
                         </span>
                         <span className="hidden sm:inline text-cream/30 text-xs">—</span>
-                        <span className="text-cream/70 text-xs font-light">
+                        <span className="text-cream/70 text-xs font-normal">
                             {photo.caption}
                         </span>
                     </div>
                     <div className="flex items-center gap-6">
-                        <span className="text-cream/40 text-xs tracking-widest font-light tabular-nums">
+                        <span className="text-cream/40 text-xs tracking-widest font-normal tabular-nums">
                             {currentIndex + 1} / {photos.length}
                         </span>
                         <button

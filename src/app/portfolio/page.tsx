@@ -24,9 +24,9 @@ export default function PortfolioPage() {
 
             <header className="pt-36 md:pt-44 pb-16 md:pb-24 px-5 md:px-12" style={{ background: "linear-gradient(180deg, #0D1520 0%, #1B2A4A 100%)" }}>
                 <div className="max-w-7xl mx-auto">
-                    <p className="text-gold tracking-[0.35em] text-xs uppercase font-light mb-4">Portfolio</p>
+                    <p className="text-gold tracking-[0.35em] text-xs uppercase font-normal mb-4">Portfolio</p>
                     <h1 className="font-display text-5xl md:text-7xl leading-[1.05] max-w-3xl">Quatre séries, un même regard.</h1>
-                    <p className="text-cream/80 font-light mt-6 max-w-xl leading-relaxed">
+                    <p className="text-cream/80 font-normal mt-6 max-w-xl leading-relaxed">
                         Choisissez l&apos;univers qui vous parle. Chaque série présente les photos en entier, dans l&apos;ordre où je les raconterais.
                     </p>
                 </div>
@@ -54,7 +54,7 @@ export default function PortfolioPage() {
                             <div className="md:col-span-6">
                                 <p className="text-gold/80 text-xs tracking-[0.35em] uppercase mb-4">{s.index} — {s.kicker}</p>
                                 <h2 className="font-display text-4xl md:text-6xl leading-[1.05] mb-6">{s.title}</h2>
-                                <p className="text-cream/80 font-light leading-relaxed max-w-md mb-8">{s.description}</p>
+                                <p className="text-cream/80 font-normal leading-relaxed max-w-md mb-8">{s.description}</p>
                                 <span className="inline-flex items-center gap-3 text-gold uppercase tracking-[0.25em] text-xs border-b border-gold/40 pb-2 group-hover:border-gold transition-colors">
                                     Voir la série · {s.photos.length} photos
                                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

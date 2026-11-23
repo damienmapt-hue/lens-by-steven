@@ -58,14 +58,14 @@ export default function Hero() {
                     className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
                 >
                     <div className="max-w-3xl">
-                        <motion.div variants={itemVariants} className="font-sans font-medium text-[#E6CB7E] text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
+                        <motion.div variants={itemVariants} className="font-sans font-medium text-[#E6CB7E] text-[11px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
                             Photographe · Auch, Occitanie
                         </motion.div>
-                        <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-[2.9rem] lg:text-5xl leading-[1.08] tracking-tight">
-                            <span className="text-white md:inline block">Capturer l&apos;instant.</span>{" "}
-                            <span className="text-gold md:inline block">Révéler l&apos;émotion.</span>
+                        <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-5xl lg:text-6xl leading-[1.05] tracking-tight">
+                            <span className="text-white block">Capturer l&apos;instant.</span>{" "}
+                            <span className="text-gold block">Révéler l&apos;émotion.</span>
                         </motion.h1>
-                        <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-lg font-light mt-4 max-w-xl leading-relaxed">
+                        <motion.p variants={itemVariants} className="text-cream/90 text-base md:text-lg font-normal mt-4 max-w-xl leading-relaxed">
                             Mariages, concerts, sport, portraits : des images qui ressemblent à ceux qui les vivent.
                         </motion.p>
                     </div>
@@ -102,7 +102,7 @@ export default function Hero() {
                 transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 hidden lg:flex flex-col items-center gap-3 pointer-events-none"
             >
-                <span className="font-serif text-gold text-[10px] tracking-[0.4em] uppercase opacity-80">Défiler</span>
+                <span className="font-serif text-gold text-[11px] tracking-[0.4em] uppercase opacity-80">Défiler</span>
                 <span className="block w-px h-10 bg-gradient-to-b from-gold to-transparent" />
             </motion.div>
         </section>

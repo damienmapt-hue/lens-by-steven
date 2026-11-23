@@ -1,24 +1,17 @@
 import type { Metadata } from "next";
-import { Syne, Cormorant_Garamond, Jost } from "next/font/google";
+import { Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import PageLoader from "@/components/PageLoader";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const syne = Syne({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["700", "800"],
-  variable: "--font-syne",
+  variable: "--font-outfit",
   display: 'swap',
 });
-const cormorant = Cormorant_Garamond({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-cormorant",
-  display: 'swap',
-});
-const jost = Jost({
-  subsets: ["latin"],
-  variable: "--font-jost",
+  variable: "--font-inter",
   display: 'swap',
 });
 
@@ -166,7 +159,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${syne.variable} ${cormorant.variable} ${jost.variable} font-sans bg-dark text-white antialiased`}
+        className={`${outfit.variable} ${inter.variable} font-sans bg-dark text-white antialiased`}
       >
         <PageLoader />
         <SmoothScrollProvider>

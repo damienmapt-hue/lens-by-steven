@@ -44,7 +44,7 @@ export default function SeriesPage({ params }: { params: { slug: string } }) {
                             <h1 className="font-display text-5xl md:text-7xl leading-[1.05]">{s.title}</h1>
                         </div>
                         <div className="md:col-span-5">
-                            <p className="text-cream/80 font-light leading-relaxed">{s.description}</p>
+                            <p className="text-cream/80 font-normal leading-relaxed">{s.description}</p>
                             <p className="text-gold/70 text-xs tracking-[0.25em] uppercase mt-5">{s.photos.length} photos</p>
                         </div>
                     </div>

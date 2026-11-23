@@ -21,7 +21,7 @@ export default function PolitiqueConfidentialitePage() {
                         Politique de Confidentialité
                     </h1>
 
-                    <div className="space-y-10 text-cream/85 font-light leading-relaxed">
+                    <div className="space-y-10 text-cream/85 font-normal leading-relaxed">
 
                         {/* Intro */}
                         <div className="border border-gold/20 bg-gold/[0.03] rounded-[2px] p-6">

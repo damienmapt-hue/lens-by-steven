@@ -22,7 +22,7 @@ export default function MentionsLegalesPage() {
                         Mentions Légales
                     </h1>
 
-                    <div className="space-y-10 text-cream/85 font-light leading-relaxed">
+                    <div className="space-y-10 text-cream/85 font-normal leading-relaxed">
 
                         {/* 1. Éditeur */}
                         <div>

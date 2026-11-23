@@ -59,7 +59,7 @@ export default function JustifiedGallery({ photos, rowHeight = 320, priorityCoun
                             />
                             <span className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col justify-end bg-gradient-to-t from-dark/80 via-dark/20 to-transparent px-4 pb-3 pt-12 text-left opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100">
                                 <span className="mb-2 block h-px w-6 bg-gold" />
-                                <span className="text-sm font-light leading-snug text-white">{photo.caption}</span>
+                                <span className="text-sm font-normal leading-snug text-white">{photo.caption}</span>
                             </span>
                         </motion.button>
                     )

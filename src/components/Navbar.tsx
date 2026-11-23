@@ -30,16 +30,6 @@ export default function Navbar() {
                 return;
             }
 
-            const testimonialsEl = document.getElementById('temoignages');
-            if (testimonialsEl) {
-                const rect = testimonialsEl.getBoundingClientRect();
-                // Check if the navbar is overlapping with the testimonials section
-                if (rect.top <= 80 && rect.bottom >= 80) {
-                    setNavState('light');
-                    return;
-                }
-            }
-
             setNavState('scrolled');
         };
 
