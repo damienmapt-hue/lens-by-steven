@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    overflow-x: hidden;
+  }
+
   html, body {
     @apply bg-dark text-white;
-    overflow-x: hidden;
     max-width: 100%;
     position: relative;
     width: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* clip (et non hidden) : n'empêche pas le position: sticky de la section Prestations */
+  body {
+    overflow-x: clip;
   }
 
   /* Textes corps — lisibilité garantie */
