@@ -3,8 +3,12 @@
 import { motion, Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import MagneticButton from "./MagneticButton";
+
+const imageBase = { alt: "", fill: true, priority: true, quality: 85, sizes: "100vw" } as const;
+const { props: { srcSet: desktopSrcSet } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-22.jpg" });
+const { props: { srcSet: mobileSrcSet, alt: _alt, ...mobileImg } } = getImageProps({ ...imageBase, src: "/portfolio/series/mariage/mariage-24.jpg" });
 
 export default function Hero() {
     const containerVariants: Variants = {
@@ -22,28 +26,29 @@ export default function Hero() {
 
     return (
         <section className="relative min-h-[100dvh] w-full overflow-hidden bg-dark flex flex-col justify-end">
-            {/* Photo : cadrée en entier sur mobile, plein écran sur ordinateur */}
+            {/* Photo : groupe en paysage sur ordinateur, couple en vertical sur mobile (une seule image téléchargée) */}
             <motion.div
                 initial={{ scale: 1.06, filter: "brightness(0.5)" }}
                 animate={{ scale: 1, filter: "brightness(1)" }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute inset-x-0 top-[72px] aspect-[3/2] md:inset-0 md:top-0 md:aspect-auto origin-center [mask-image:linear-gradient(to_bottom,black_72%,transparent)] md:[mask-image:none]"
+                className="absolute inset-0 origin-center"
             >
-                <Image
-                    src="/portfolio/series/mariage/mariage-22.jpg"
-                    alt="Mariés, témoins et invités autour d'une voiture de collection verte — mariage dans le Gers photographié par Steven Dufour"
-                    fill
-                    priority
-                    quality={85}
-                    className="object-cover object-bottom"
-                    sizes="100vw"
-                />
+                <picture>
+                    <source media="(min-width: 768px)" srcSet={desktopSrcSet} sizes="100vw" />
+                    <source media="(max-width: 767px)" srcSet={mobileSrcSet} sizes="100vw" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                        {...mobileImg}
+                        alt="Mariage dans le Gers près d'une voiture de collection verte, photographié par Steven Dufour"
+                        className="absolute inset-0 h-full w-full object-cover object-[50%_25%] md:object-bottom"
+                    />
+                </picture>
                 <div className="absolute inset-0 bg-navy/20 mix-blend-multiply" />
             </motion.div>
 
             {/* Voiles : haut (menu) et bas (texte) */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-dark/80 via-dark/5 via-30% to-transparent md:to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 h-[70%] md:h-[56%] pointer-events-none bg-gradient-to-t from-dark from-15% via-dark/75 via-50% to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[62%] md:h-[56%] pointer-events-none bg-gradient-to-t from-dark from-15% via-dark/75 via-50% to-transparent" />
 
             <div className="relative z-10 container mx-auto max-w-7xl px-6 pb-16 md:pb-24">
                 <motion.div
@@ -53,7 +58,7 @@ export default function Hero() {
                     className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between"
                 >
                     <div className="max-w-3xl">
-                        <motion.div variants={itemVariants} className="font-serif font-medium text-gold text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
+                        <motion.div variants={itemVariants} className="font-sans font-medium text-[#E6CB7E] text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.4em] uppercase mb-4 [text-shadow:0_0_14px_rgba(13,21,32,1),0_1px_4px_rgba(13,21,32,1)]">
                             Photographe · Auch, Occitanie
                         </motion.div>
                         <motion.h1 variants={itemVariants} className="font-display font-medium text-[2.1rem] sm:text-5xl md:text-[2.9rem] lg:text-5xl leading-[1.08] tracking-tight">
