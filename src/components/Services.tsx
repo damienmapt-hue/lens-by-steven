@@ -7,19 +7,16 @@ import Link from "next/link";
 import Image from "next/image";
 import TextReveal from "./TextReveal";
 
-interface ServicePhoto {
-    src: string;
-    alt: string;
-    position?: string;
-}
-
 interface Service {
     id: string;
     href: string;
     title: string;
+    short: string;
     description: string;
     tags: string[];
-    photos: ServicePhoto[];
+    photo: string;
+    alt: string;
+    position: string;
 }
 
 const services: Service[] = [
@@ -27,81 +24,79 @@ const services: Service[] = [
         id: "mariage",
         href: "/photographe-mariage-auch",
         title: "Mariage",
+        short: "Mariage",
         description: "Votre jour J, raconté sans mise en scène. Un reportage naturel et discret à Auch et dans le Gers, des préparatifs à la soirée.",
         tags: ["Préparatifs", "Cérémonie", "Soirée"],
-        photos: [
-            { src: "/portfolio/series/mariage/mariage-24.jpg", alt: "Le baiser des mariés près d'une voiture de collection verte", position: "50% 30%" },
-            { src: "/portfolio/series/mariage/mariage-27.jpg", alt: "Les mariés enlacés sous le voile", position: "50% 30%" },
-            { src: "/portfolio/series/mariage/mariage-31.jpg", alt: "Les mariés en noir et blanc", position: "50% 40%" },
-        ],
+        photo: "/portfolio/series/mariage/mariage-24.jpg",
+        alt: "Le baiser des mariés près d'une voiture de collection verte",
+        position: "50% 30%",
     },
     {
         id: "events",
         href: "/photographe-evenementiel",
         title: "Événementiel",
+        short: "Événementiel",
         description: "Concerts, galas, conférences, fêtes : l'énergie de la salle et les instants qu'on ne vit qu'une fois, avec discrétion.",
         tags: ["Concerts", "Galas", "Soirées privées"],
-        photos: [
-            { src: "/portfolio/series/scene/scene-09.jpg", alt: "Guitariste sur scène dans la fumée colorée", position: "50% 40%" },
-            { src: "/portfolio/series/scene/scene-10.jpg", alt: "Chanteuse sous les projecteurs", position: "50% 45%" },
-            { src: "/portfolio/series/scene/scene-05.jpg", alt: "Élection de Miss, la lauréate sur scène", position: "50% 30%" },
-        ],
+        photo: "/portfolio/series/scene/scene-09.jpg",
+        alt: "Guitariste sur scène dans la fumée colorée",
+        position: "50% 40%",
     },
     {
         id: "sport",
         href: "/photographie-sportive",
         title: "Photographie sportive",
+        short: "Sport",
         description: "L'intensité du geste, la joie de la victoire. Matchs, entraînements et portraits d'équipe pour les clubs du Gers et d'Occitanie.",
         tags: ["Matchs", "Clubs", "Portraits d'équipe"],
-        photos: [
-            { src: "/portfolio/series/sport/sport-40.jpg", alt: "Joueur de football en plein coup de pied sous les projecteurs", position: "50% 55%" },
-            { src: "/portfolio/series/sport/sport-35.jpg", alt: "Plongeon d'un gardien de but", position: "50% 55%" },
-            { src: "/portfolio/series/sport/sport-39.jpg", alt: "Duel pour le ballon sur un terrain de football", position: "50% 60%" },
-        ],
+        photo: "/portfolio/series/sport/sport-40.jpg",
+        alt: "Joueur de football en plein coup de pied sous les projecteurs",
+        position: "50% 55%",
     },
     {
         id: "portrait",
         href: "/portrait",
         title: "Portraits",
+        short: "Portraits",
         description: "Des portraits naturels et élégants, dans une ambiance de confiance pour que vous soyez pleinement vous-même.",
         tags: ["Studio", "Famille", "Artistique"],
-        photos: [
-            { src: "/portfolio/portrait-rose-doree.jpeg", alt: "Portrait artistique d'une femme tenant une rose dorée", position: "50% 30%" },
-            { src: "/portfolio/portrait-fourrure.jpeg", alt: "Portrait mode, veste en fourrure", position: "50% 30%" },
-            { src: "/portfolio/portrait-duo-amies.jpeg", alt: "Portrait en noir et blanc de deux amies complices", position: "50% 35%" },
-        ],
+        photo: "/portfolio/portrait-rose-doree.jpeg",
+        alt: "Portrait artistique d'une femme tenant une rose dorée",
+        position: "50% 30%",
     },
     {
         id: "business",
         href: "/photographe-entreprise",
         title: "Entreprises & commerces",
+        short: "Entreprises",
         description: "Des visuels professionnels qui renforcent votre image : reportages, portraits corporate, locaux et produits, pour les TPE, PME et commerces.",
         tags: ["Corporate", "Locaux", "Produits"],
-        photos: [
-            { src: "/portfolio/entreprise-salon.jpg", alt: "Salon d'attente lumineux d'une entreprise" },
-            { src: "/portfolio/entreprise-bureau.jpg", alt: "Espace de travail d'une entreprise" },
-            { src: "/portfolio/entreprise-entree.jpg", alt: "Façade vitrée d'une entreprise" },
-        ],
+        photo: "/portfolio/entreprise-salon.jpg",
+        alt: "Salon d'attente lumineux d'une entreprise",
+        position: "50% 50%",
     },
 ];
 
-const PER_SERVICE = 3;
-const TOTAL_STEPS = services.length * PER_SERVICE;
-
 export default function Services() {
     const track = useRef<HTMLDivElement>(null);
-    const [step, setStep] = useState(0);
+    const [active, setActive] = useState(0);
 
-    // La section reste bloquée à l'écran ; la progression du scroll choisit la prestation et la photo
+    // La section reste bloquée à l'écran ; la progression du scroll choisit la prestation affichée
     const { scrollYProgress } = useScroll({ target: track, offset: ["start start", "end end"] });
     useMotionValueEvent(scrollYProgress, "change", (p) => {
-        const next = Math.min(TOTAL_STEPS - 1, Math.max(0, Math.floor(p * TOTAL_STEPS)));
-        setStep((prev) => (prev === next ? prev : next));
+        const next = Math.min(services.length - 1, Math.max(0, Math.floor(p * services.length)));
+        setActive((prev) => (prev === next ? prev : next));
     });
 
-    const sIdx = Math.floor(step / PER_SERVICE);
-    const pIdx = step % PER_SERVICE;
-    const current = services[sIdx];
+    const goTo = (i: number) => {
+        const el = track.current;
+        if (!el) return;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        const range = el.offsetHeight - window.innerHeight;
+        window.scrollTo({ top: top + ((i + 0.5) / services.length) * range, behavior: "smooth" });
+    };
+
+    const current = services[active];
 
     return (
         <section
@@ -109,76 +104,62 @@ export default function Services() {
             className="relative scroll-mt-0"
             style={{ background: "linear-gradient(180deg, #0D1520 0%, #111e33 50%, #0D1520 100%)" }}
         >
-            {/* Zone de scroll : 6 écrans de haut, pendant lesquels le contenu reste fixe */}
-            <div ref={track} className="relative h-[600vh]">
+            {/* Zone de scroll : la partie fixe reste à l'écran pendant ~3 écrans de défilement */}
+            <div ref={track} className="relative h-[400vh]">
                 <div className="sticky top-0 h-[100dvh] overflow-hidden">
-                    <div className="container mx-auto max-w-7xl h-full px-5 md:px-8 pt-24 md:pt-28 pb-6 md:pb-10 grid gap-x-16 gap-y-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr] content-start lg:content-stretch">
-                        {/* Titre fixe */}
-                        <div className="lg:col-span-5">
+                    <div className="container mx-auto max-w-7xl h-full px-5 md:px-8 pt-24 md:pt-28 pb-6 md:pb-10 grid gap-x-12 gap-y-4 lg:grid-cols-12 lg:grid-rows-[auto_1fr_auto] content-start lg:content-stretch">
+                        {/* Titre fixe, sur 2 lignes */}
+                        <div className="lg:col-span-7">
                             <span className="block text-gold/80 font-light tracking-[0.35em] text-[10px] md:text-xs uppercase mb-2 md:mb-4">
                                 Prestations
                             </span>
                             <TextReveal delay={0.1}>
-                                <h2 className="font-display text-[1.65rem] leading-[1.1] sm:text-4xl lg:text-5xl text-white">
-                                    Cinq façons de<br />travailler ensemble.
+                                <h2 className="font-display text-[1.65rem] leading-[1.1] sm:text-4xl lg:text-[clamp(2.4rem,4.1vw,3.4rem)] text-white">
+                                    <span className="block whitespace-nowrap">Cinq façons de</span>
+                                    <span className="block whitespace-nowrap">travailler ensemble.</span>
                                 </h2>
                             </TextReveal>
                         </div>
 
-                        {/* Photos : une seule visible, elles changent au scroll */}
+                        {/* Photo : une par prestation, en fondu au scroll */}
                         <Link
                             href={current.href}
                             aria-label={`${current.title} : en savoir plus`}
-                            className="relative block w-full h-[40dvh] sm:h-[42dvh] lg:h-[min(74dvh,700px)] lg:w-auto lg:aspect-[4/5] lg:col-start-7 lg:col-span-6 lg:row-start-1 lg:row-span-2 lg:self-center lg:justify-self-end overflow-hidden bg-dark"
+                            className="relative block w-full h-[40dvh] sm:h-[42dvh] lg:h-[min(78dvh,720px)] lg:col-start-8 lg:col-span-5 lg:row-start-1 lg:row-span-3 lg:self-center overflow-hidden bg-dark"
                         >
-                            {services.map((s, si) =>
-                                Math.abs(si - sIdx) <= 1
-                                    ? s.photos.map((photo, pi) => {
-                                          const on = si === sIdx && pi === pIdx;
-                                          return (
-                                              <motion.div
-                                                  key={photo.src}
-                                                  className="absolute inset-0"
-                                                  initial={false}
-                                                  animate={{ opacity: on ? 1 : 0, scale: on ? 1 : 1.1 }}
-                                                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                                              >
-                                                  <Image
-                                                      src={photo.src}
-                                                      alt={photo.alt}
-                                                      fill
-                                                      quality={85}
-                                                      priority={si === 0 && pi === 0}
-                                                      sizes="(max-width: 1024px) 100vw, 560px"
-                                                      className="object-cover"
-                                                      style={{ objectPosition: photo.position ?? "50% 50%" }}
-                                                  />
-                                              </motion.div>
-                                          );
-                                      })
-                                    : null
-                            )}
+                            {services.map((s, i) => (
+                                <motion.div
+                                    key={s.id}
+                                    className="absolute inset-0"
+                                    initial={false}
+                                    animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.1 }}
+                                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    <Image
+                                        src={s.photo}
+                                        alt={s.alt}
+                                        fill
+                                        quality={85}
+                                        loading="eager"
+                                        sizes="(max-width: 1024px) 100vw, 520px"
+                                        className="object-cover"
+                                        style={{ objectPosition: s.position }}
+                                    />
+                                </motion.div>
+                            ))}
                             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-dark/70 to-transparent" />
-                            {/* Barres de progression : 5 groupes de 3 */}
-                            <div className="absolute inset-x-4 bottom-4 flex gap-3" aria-hidden>
-                                {services.map((s, si) => (
-                                    <div key={s.id} className="flex flex-1 gap-1">
-                                        {s.photos.map((p, pi) => {
-                                            const done = si < sIdx || (si === sIdx && pi <= pIdx);
-                                            return (
-                                                <span
-                                                    key={p.src}
-                                                    className={`h-[2px] flex-1 transition-colors duration-500 ${done ? "bg-gold" : "bg-white/30"}`}
-                                                />
-                                            );
-                                        })}
-                                    </div>
+                            <div className="absolute inset-x-4 bottom-4 flex gap-2" aria-hidden>
+                                {services.map((s, i) => (
+                                    <span
+                                        key={s.id}
+                                        className={`h-[2px] flex-1 transition-colors duration-500 ${i <= active ? "bg-gold" : "bg-white/30"}`}
+                                    />
                                 ))}
                             </div>
                         </Link>
 
                         {/* Texte de la prestation en cours */}
-                        <div className="lg:col-span-5 lg:self-start lg:pt-6 min-h-[200px]">
+                        <div className="lg:col-span-6 lg:self-center min-h-[190px]">
                             <div className="border-t border-white/10 pt-4 md:pt-8">
                                 <AnimatePresence mode="wait">
                                     <motion.div
@@ -188,25 +169,25 @@ export default function Services() {
                                         exit={{ opacity: 0, y: -16 }}
                                         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                                     >
-                                        <div className="flex items-baseline gap-3 mb-2 md:mb-3">
-                                            <span className="font-display text-xs text-gold tabular-nums tracking-widest">
-                                                0{sIdx + 1} / 0{services.length}
-                                            </span>
-                                        </div>
-                                        <h3 className="font-display text-2xl md:text-4xl text-white mb-2 md:mb-4">{current.title}</h3>
-                                        <p className="text-cream/85 text-sm md:text-base leading-relaxed font-light max-w-md">
+                                        <span className="block font-display text-xs text-gold tabular-nums tracking-widest mb-2 md:mb-4">
+                                            0{active + 1} / 0{services.length}
+                                        </span>
+                                        <h3 className="font-display text-2xl md:text-4xl lg:text-5xl text-white mb-2 md:mb-5 leading-[1.05]">
+                                            {current.title}
+                                        </h3>
+                                        <p className="text-cream/85 text-sm md:text-base lg:text-lg leading-relaxed font-light max-w-lg">
                                             {current.description}
                                         </p>
-                                        <div className="mt-3 md:mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                                        <div className="mt-3 md:mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
                                             {current.tags.map((t) => (
-                                                <span key={t} className="text-[10px] uppercase tracking-[0.2em] text-cream/55">
+                                                <span key={t} className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-cream/60">
                                                     {t}
                                                 </span>
                                             ))}
                                         </div>
                                         <Link
                                             href={current.href}
-                                            className="group mt-4 md:mt-6 inline-flex items-center gap-2 text-gold text-xs uppercase tracking-[0.25em] border-b border-gold/40 pb-1 hover:border-gold transition-colors"
+                                            className="group mt-4 md:mt-7 inline-flex items-center gap-2 text-gold text-xs uppercase tracking-[0.25em] border-b border-gold/40 pb-1 hover:border-gold transition-colors"
                                         >
                                             En savoir plus
                                             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -215,6 +196,27 @@ export default function Services() {
                                 </AnimatePresence>
                             </div>
                         </div>
+
+                        {/* Menu des 5 prestations (ordinateur) */}
+                        <nav aria-label="Prestations" className="hidden lg:block lg:col-span-7 lg:self-end">
+                            <ul className="flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-5">
+                                {services.map((s, i) => (
+                                    <li key={s.id}>
+                                        <button
+                                            type="button"
+                                            onClick={() => goTo(i)}
+                                            aria-current={active === i}
+                                            className={`group flex items-baseline gap-1.5 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 ${active === i ? "text-gold" : "text-cream/50 hover:text-cream"}`}
+                                        >
+                                            <span className="tabular-nums">0{i + 1}</span>
+                                            <span className={`pb-1 border-b transition-colors duration-300 ${active === i ? "border-gold" : "border-transparent group-hover:border-cream/40"}`}>
+                                                {s.short}
+                                            </span>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
