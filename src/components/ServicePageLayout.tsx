@@ -106,7 +106,7 @@ export default function ServicePageLayout({
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.08, duration: 0.5 }}
-                                className="relative aspect-square overflow-hidden group"
+                                className="relative aspect-[4/5] overflow-hidden group"
                             >
                                 <Image
                                     src={photo.src}

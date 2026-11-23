@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { series } from '@/data/series'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://www.lensbysteven.fr'
@@ -52,5 +53,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.8,
         },
+        ...series.map((s) => ({
+            url: `${baseUrl}/portfolio/${s.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+        })),
     ]
 }

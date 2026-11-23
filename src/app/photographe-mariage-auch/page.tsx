@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         title: "Photographe Mariage à Auch (Gers) | Steven Dufour",
         description: "Photographe de mariage à Auch, Gers (32). Des souvenirs authentiques et émouvants de votre jour J en Occitanie.",
         url: "https://www.lensbysteven.fr/photographe-mariage-auch",
-        images: [{ url: "/portfolio/evenement-sourire.jpg", width: 1200, height: 630, alt: "Photographe mariage Auch — Steven Dufour" }],
+        images: [{ url: "/portfolio/series/mariage/mariage-21.jpg", width: 1200, height: 630, alt: "Photographe mariage Auch — Steven Dufour" }],
     },
 };
 
@@ -28,7 +28,7 @@ export default function PhotographeMariagePage() {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
             <ServicePageLayout
-                heroSrc="/portfolio/evenement-sourire.jpg"
+                heroSrc="/portfolio/series/mariage/mariage-21.jpg"
                 heroAlt="Photographe mariage à Auch dans le Gers — Steven Dufour"
                 badge="Mariage · Auch, Gers"
                 h1="Photographe Mariage à Auch"
@@ -45,12 +45,12 @@ export default function PhotographeMariagePage() {
                     "Déplacements dans tout le Gers et l'Occitanie",
                 ]}
                 photos={[
-                    { src: "/portfolio/evenement-sourire.jpg", alt: "Émotion de mariage dans le Gers — Steven Dufour" },
-                    { src: "/portfolio/evenement-mains.jpg", alt: "Détail mains mariage Auch — Steven Dufour" },
-                    { src: "/portfolio/evenement-bouteilles-parasol.jpg", alt: "Vin d'honneur mariage Auch — Steven Dufour" },
-                    { src: "/portfolio/event-table.jpg", alt: "Décoration mariage dans le Gers — Steven Dufour" },
-                    { src: "/portfolio/portrait-duo-amies.jpeg", alt: "Portrait duo mariage Auch — Steven Dufour" },
-                    { src: "/portfolio/evenement-conference-nb.jpg", alt: "Cérémonie mariage Auch — Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-24.jpg", alt: "Le baiser des mariés près d'une voiture de collection — mariage dans le Gers, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-27.jpg", alt: "Les mariés enlacés sous le voile — photographe mariage Auch, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-25.jpg", alt: "Les mains des mariés et le bouquet de callas — Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-31.jpg", alt: "Les mariés en noir et blanc — photographe mariage Occitanie, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-14.jpg", alt: "Les mariés dans l'escalier — reportage mariage Auch, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-13.jpg", alt: "Le marié souriant, bouquet en main — Steven Dufour photographe Auch" },
                 ]}
                 faq={[
                     {

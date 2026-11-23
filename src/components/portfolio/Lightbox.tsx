@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { Photo } from '@/data/portfolio'
+import { Photo, getSeries } from '@/data/series'
 import { useEffect, useCallback, useState } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
@@ -78,12 +78,12 @@ export default function Lightbox({ photos, currentIndex, onClose, onNext, onPrev
                 {/* Header bar */}
                 <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-5">
                     <div className="flex items-center gap-3">
-                        <span className="text-gold text-[10px] tracking-[0.3em] uppercase font-light">
-                            {photo.category}
+                        <span className="hidden sm:inline text-gold text-[10px] tracking-[0.3em] uppercase font-light">
+                            {getSeries(photo.series)?.title}
                         </span>
-                        <span className="text-cream/30 text-xs">—</span>
-                        <span className="text-cream/50 text-xs font-light">
-                            {photo.alt}
+                        <span className="hidden sm:inline text-cream/30 text-xs">—</span>
+                        <span className="text-cream/70 text-xs font-light">
+                            {photo.caption}
                         </span>
                     </div>
                     <div className="flex items-center gap-6">
@@ -123,6 +123,7 @@ export default function Lightbox({ photos, currentIndex, onClose, onNext, onPrev
                                 fill
                                 className="object-contain"
                                 sizes="100vw"
+                                quality={90}
                                 priority
                             />
                         </motion.div>

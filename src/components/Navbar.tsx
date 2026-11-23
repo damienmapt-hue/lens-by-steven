@@ -7,12 +7,12 @@ import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 
 const links = [
-    { name: "Travail", href: "#travail" },
-    { name: "Prestations", href: "#prestations" },
+    { name: "Travail", href: "/#travail" },
+    { name: "Prestations", href: "/#prestations" },
     { name: "Tarifs", href: "/tarifs" },
-    { name: "À propos", href: "#a-propos" },
-    { name: "Témoignages", href: "#temoignages" },
-    { name: "Contact", href: "#contact" },
+    { name: "À propos", href: "/#a-propos" },
+    { name: "Témoignages", href: "/#temoignages" },
+    { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
