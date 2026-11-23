@@ -53,8 +53,8 @@ export default function PhotographeMariagePage() {
                     { src: "/portfolio/series/mariage/mariage-21.jpg", alt: "Le cortège de mariage devant la voiture de collection — Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-25.jpg", alt: "Les mains des mariés et le bouquet de callas — Steven Dufour" },
                     { src: "/portfolio/series/mariage/mariage-31.jpg", alt: "Les mariés en noir et blanc — photographe mariage Occitanie, Steven Dufour" },
-                    { src: "/portfolio/series/mariage/mariage-14.jpg", alt: "Les mariés dans l'escalier — reportage mariage Auch, Steven Dufour" },
-                    { src: "/portfolio/series/mariage/mariage-13.jpg", alt: "Le marié souriant, bouquet en main — Steven Dufour photographe Auch" },
+                    { src: "/portfolio/series/mariage/mariage-26.jpg", alt: "Le voile dans le vent — reportage mariage Auch, Steven Dufour" },
+                    { src: "/portfolio/series/mariage/mariage-28.jpg", alt: "Sous le voile, le baiser — Steven Dufour photographe Auch" },
                     { src: "/portfolio/series/mariage/mariage-32.jpg", alt: "Main dans la main devant une bâtisse en pierre — mariage dans le Gers, Steven Dufour" },
                 ]}
                 faq={[
